@@ -40,17 +40,19 @@ export default function AboutPage() {
     <>
       <Header />
 
-      <main ref={ref} className="bg-white text-gray-800 overflow-hidden relative pt-20">
+      {/* MODIFIED: The 'pt-20' class has been removed from the main tag. */}
+      <main ref={ref} className="bg-white text-gray-800 overflow-hidden relative">
+        
         {/* === SCROLL PROGRESS BAR === */}
         <motion.div
           className="fixed top-0 left-0 h-[4px] bg-gradient-to-r from-[#7D5F42] to-[#d1b08a] z-50 shadow-[0_0_10px_#7D5F42]/40 origin-left"
           style={{ scaleX: scrollYProgress }}
         />
 
-        {/* === HERO VIDEO (no overlay, lazy-load, no poster) === */}
+        {/* === HERO VIDEO === */}
         <section
           ref={heroRef}
-          className="relative w-full h-[90vh] flex items-center justify-center overflow-hidden"
+          className="relative w-full h-[50vh] md:h-[90vh] flex items-center justify-center overflow-hidden"
         >
           {videoVisible ? (
             <video

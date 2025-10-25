@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
+// Removed Next.js specific imports (Image and Link) and replaced them with standard HTML/React elements.
 import { Menu, X, ChevronDown } from "lucide-react";
 
 export default function Header() {
@@ -9,66 +8,86 @@ export default function Header() {
   const [aboutOpen, setAboutOpen] = useState(false);
   const [conditionsOpen, setConditionsOpen] = useState(false);
 
+  // Helper function to handle navigation and close menu in mobile view
+  const navigate = () => {
+    // Closes the main menu and both sub-menus when a link is clicked
+    setMenuOpen(false);
+    setAboutOpen(false);
+    setConditionsOpen(false);
+  };
+
+  // Helper to ensure the main menu toggle also closes sub-menus when collapsing
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+    // Optionally close sub-menus when the main menu closes
+    if (menuOpen) {
+        setAboutOpen(false);
+        setConditionsOpen(false);
+    }
+  };
+
   return (
-    <header className="w-full bg-white shadow-md fixed top-0 left-0 z-50">
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3 md:py-4">
-        {/* === LOGO ONLY === */}
-        <Link href="/" className="flex items-center">
-          <Image
-            src="/logo.png"
+    // Header uses Inter font and is static (non-sticky) as requested
+    <header className="w-full bg-white shadow-lg font-[Inter]">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 py-3 md:py-4">
+        {/* === LOGO ONLY (now using <a> and <img>) === */}
+        <a href="/" className="flex items-center rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004AAD]/50">
+          {/* Using a placeholder image URL that represents a logo, since local assets are unavailable */}
+          <img
+            src="https://placehold.co/60x60/004AAD/ffffff?text=BOH"
             alt="Beacon of Hope Psychiatry Logo"
             width={60}
             height={60}
-            className="object-contain"
+            className="object-contain rounded-full"
           />
-        </Link>
+        </a>
 
         {/* === DESKTOP MENU === */}
-        <nav className="hidden md:flex items-center space-x-8 text-gray-700 font-medium">
-          <Link href="/" className="hover:text-[#004AAD] transition-colors">
+        <nav className="hidden md:flex items-center space-x-6 lg:space-x-8 text-gray-700 font-medium">
+          <a href="/" className="hover:text-[#004AAD] transition-colors rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004AAD]/50 p-1">
             Home
-          </Link>
+          </a>
 
-          {/* === ABOUT DROPDOWN === */}
+          {/* === ABOUT DROPDOWN (DESKTOP) === */}
           <div
             className="relative group"
             onMouseEnter={() => setAboutOpen(true)}
             onMouseLeave={() => setAboutOpen(false)}
           >
-            <button className="flex items-center space-x-1 hover:text-[#004AAD] transition-colors">
+            <button className="flex items-center space-x-1 hover:text-[#004AAD] transition-colors p-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004AAD]/50">
               <span>About</span>
-              <ChevronDown className="w-4 h-4" />
+              <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
             </button>
             {aboutOpen && (
-              <div className="absolute left-0 top-8 bg-white shadow-lg rounded-lg py-2 w-40 border border-gray-100">
-                <Link
+              <div className="absolute left-0 top-8 bg-white shadow-xl rounded-xl py-2 w-40 border border-gray-100 z-50 overflow-hidden transform transition-all duration-200">
+                <a
                   href="/about"
-                  className="block px-4 py-2 hover:bg-[#004AAD]/10 hover:text-[#004AAD]"
+                  className="block px-4 py-2 text-sm hover:bg-[#004AAD] hover:text-white transition-colors"
                 >
                   About Us
-                </Link>
-                <Link
+                </a>
+                <a
                   href="/team"
-                  className="block px-4 py-2 hover:bg-[#004AAD]/10 hover:text-[#004AAD]"
+                  className="block px-4 py-2 text-sm hover:bg-[#004AAD] hover:text-white transition-colors"
                 >
                   Our Team
-                </Link>
+                </a>
               </div>
             )}
           </div>
 
-          {/* === CONDITIONS DROPDOWN === */}
+          {/* === CONDITIONS DROPDOWN (DESKTOP) === */}
           <div
             className="relative group"
             onMouseEnter={() => setConditionsOpen(true)}
             onMouseLeave={() => setConditionsOpen(false)}
           >
-            <button className="flex items-center space-x-1 hover:text-[#004AAD] transition-colors">
+            <button className="flex items-center space-x-1 hover:text-[#004AAD] transition-colors p-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004AAD]/50">
               <span>Conditions</span>
-              <ChevronDown className="w-4 h-4" />
+              <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
             </button>
             {conditionsOpen && (
-              <div className="absolute left-0 top-8 bg-white shadow-lg rounded-lg py-2 w-56 border border-gray-100 grid grid-cols-1">
+              <div className="absolute left-0 top-8 bg-white shadow-xl rounded-xl py-2 w-56 border border-gray-100 grid grid-cols-1 z-50 overflow-hidden transform transition-all duration-200">
                 {[
                   "depression",
                   "anxiety",
@@ -78,145 +97,156 @@ export default function Header() {
                   "adhd",
                   "ocd",
                 ].map((condition) => (
-                  <Link
+                  <a
                     key={condition}
                     href={`/${condition}`}
-                    className="block px-4 py-2 hover:bg-[#004AAD]/10 hover:text-[#004AAD] capitalize"
+                    className="block px-4 py-2 text-sm hover:bg-[#004AAD] hover:text-white capitalize transition-colors"
                   >
                     {condition.replace("-", " ")}
-                  </Link>
+                  </a>
                 ))}
               </div>
             )}
           </div>
 
-          <Link
+          <a
             href="/services"
-            className="hover:text-[#004AAD] transition-colors"
+            className="hover:text-[#004AAD] transition-colors p-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004AAD]/50"
           >
             Services
-          </Link>
+          </a>
 
-          <Link
+          <a
             href="/contact"
-            className="hover:text-[#004AAD] transition-colors"
+            className="hover:text-[#004AAD] transition-colors p-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004AAD]/50"
           >
             Contact
-          </Link>
+          </a>
 
-          <Link
+          <a
             href="/insurance"
-            className="hover:text-[#004AAD] transition-colors"
+            className="hover:text-[#004AAD] transition-colors p-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004AAD]/50"
           >
             Insurance
-          </Link>
+          </a>
 
-          <Link
+          <a
             href="/patient-intake"
-            className="hover:text-[#004AAD] transition-colors"
+            className="hover:text-[#004AAD] transition-colors p-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004AAD]/50"
           >
             Patient Intake
-          </Link>
+          </a>
 
-          <Link
+          <a
             href="/book-consultation"
-            className="ml-4 bg-[#004AAD] hover:bg-[#003a8c] text-white font-semibold px-5 py-2 rounded-full shadow-md transition-all duration-300 hover:scale-[1.05]"
+            className="ml-4 bg-[#004AAD] hover:bg-[#003a8c] text-white font-semibold px-5 py-2 rounded-full shadow-md transition-all duration-300 hover:scale-[1.05] focus:outline-none focus:ring-4 focus:ring-[#004AAD]/50"
           >
             Book a Consultation
-          </Link>
+          </a>
         </nav>
 
         {/* === MOBILE MENU BUTTON === */}
         <button
-          className="md:hidden text-gray-700"
-          onClick={() => setMenuOpen(!menuOpen)}
+          className="md:hidden text-gray-700 p-2 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#004AAD]"
+          onClick={toggleMenu}
+          aria-expanded={menuOpen}
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
         >
           {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
 
-      {/* === MOBILE MENU === */}
-      {menuOpen && (
-        <div className="md:hidden bg-white border-t border-gray-200 shadow-lg">
-          <div className="flex flex-col px-6 py-4 space-y-3 text-gray-700 font-medium">
-            <Link href="/" onClick={() => setMenuOpen(false)}>
-              Home
-            </Link>
+      {/* === MOBILE MENU (DROPDOWN) === */}
+      <div
+        className={`md:hidden overflow-hidden transition-all duration-300 ${menuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"}`}
+      >
+        <div className="flex flex-col px-4 sm:px-6 py-4 space-y-2 text-gray-700 font-medium border-t border-gray-200">
+          <a href="/" onClick={navigate} className="block w-full py-2 hover:bg-[#004AAD]/10 hover:text-[#004AAD] rounded-lg px-2">
+            Home
+          </a>
 
-            {/* ABOUT DROPDOWN */}
-            <div>
-              <button
-                onClick={() => setAboutOpen(!aboutOpen)}
-                className="flex justify-between w-full hover:text-[#004AAD]"
-              >
-                About <ChevronDown className="w-4 h-4" />
-              </button>
-              {aboutOpen && (
-                <div className="pl-4 mt-2 space-y-2 text-sm">
-                  <Link href="/about" onClick={() => setMenuOpen(false)}>
-                    About Us
-                  </Link>
-                  <Link href="/team" onClick={() => setMenuOpen(false)}>
-                    Our Team
-                  </Link>
-                </div>
-              )}
-            </div>
-
-            {/* CONDITIONS DROPDOWN */}
-            <div>
-              <button
-                onClick={() => setConditionsOpen(!conditionsOpen)}
-                className="flex justify-between w-full hover:text-[#004AAD]"
-              >
-                Conditions <ChevronDown className="w-4 h-4" />
-              </button>
-              {conditionsOpen && (
-                <div className="pl-4 mt-2 space-y-2 text-sm capitalize">
-                  {[
-                    "depression",
-                    "anxiety",
-                    "substance-abuse",
-                    "bipolar-disorder",
-                    "ptsd",
-                    "adhd",
-                    "ocd",
-                  ].map((condition) => (
-                    <Link
-                      key={condition}
-                      href={`/${condition}`}
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      {condition.replace("-", " ")}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            <Link href="/services" onClick={() => setMenuOpen(false)}>
-              Services
-            </Link>
-            <Link href="/contact" onClick={() => setMenuOpen(false)}>
-              Contact
-            </Link>
-            <Link href="/insurance" onClick={() => setMenuOpen(false)}>
-              Insurance
-            </Link>
-            <Link href="/patient-intake" onClick={() => setMenuOpen(false)}>
-              Patient Intake
-            </Link>
-
-            <Link
-              href="/book-consultation"
-              onClick={() => setMenuOpen(false)}
-              className="bg-[#004AAD] hover:bg-[#003a8c] text-white font-semibold px-5 py-2 rounded-full shadow-md text-center transition-all duration-300"
+          {/* ABOUT DROPDOWN (MOBILE) - Now with rotating chevron */}
+          <div className="border-b border-gray-100 pb-2">
+            <button
+              onClick={() => setAboutOpen(!aboutOpen)}
+              className="flex justify-between w-full py-2 px-2 hover:bg-[#004AAD]/10 hover:text-[#004AAD] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004AAD]/50"
             >
-              Book a Consultation
-            </Link>
+              About
+              <ChevronDown
+                className={`w-5 h-5 transition-transform duration-200 ${aboutOpen ? "rotate-180" : "rotate-0"}`}
+              />
+            </button>
+            {aboutOpen && (
+              <div className="pl-6 mt-1 space-y-1 text-sm bg-gray-50 rounded-lg py-1">
+                <a href="/about" onClick={navigate} className="block w-full py-2 hover:text-[#004AAD] transition-colors px-2">
+                  About Us
+                </a>
+                <a href="/team" onClick={navigate} className="block w-full py-2 hover:text-[#004AAD] transition-colors px-2">
+                  Our Team
+                </a>
+              </div>
+            )}
           </div>
+
+          {/* CONDITIONS DROPDOWN (MOBILE) - Now with rotating chevron */}
+          <div className="border-b border-gray-100 pb-2">
+            <button
+              onClick={() => setConditionsOpen(!conditionsOpen)}
+              className="flex justify-between w-full py-2 px-2 hover:bg-[#004AAD]/10 hover:text-[#004AAD] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004AAD]/50"
+            >
+              Conditions
+              <ChevronDown
+                className={`w-5 h-5 transition-transform duration-200 ${conditionsOpen ? "rotate-180" : "rotate-0"}`}
+              />
+            </button>
+            {conditionsOpen && (
+              <div className="pl-6 mt-1 space-y-1 text-sm capitalize bg-gray-50 rounded-lg py-1">
+                {[
+                  "depression",
+                  "anxiety",
+                  "substance-abuse",
+                  "bipolar-disorder",
+                  "ptsd",
+                  "adhd",
+                  "ocd",
+                ].map((condition) => (
+                  <a
+                    key={condition}
+                    href={`/${condition}`}
+                    onClick={navigate}
+                    className="block w-full py-2 hover:text-[#004AAD] transition-colors px-2"
+                  >
+                    {condition.replace("-", " ")}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Remaining links */}
+          <a href="/services" onClick={navigate} className="block w-full py-2 hover:bg-[#004AAD]/10 hover:text-[#004AAD] rounded-lg px-2">
+            Services
+          </a>
+          <a href="/contact" onClick={navigate} className="block w-full py-2 hover:bg-[#004AAD]/10 hover:text-[#004AAD] rounded-lg px-2">
+            Contact
+          </a>
+          <a href="/insurance" onClick={navigate} className="block w-full py-2 hover:bg-[#004AAD]/10 hover:text-[#004AAD] rounded-lg px-2">
+            Insurance
+          </a>
+          <a href="/patient-intake" onClick={navigate} className="block w-full py-2 hover:bg-[#004AAD]/10 hover:text-[#004AAD] rounded-lg px-2">
+            Patient Intake
+          </a>
+
+          {/* Book Consultation Button */}
+          <a
+            href="/book-consultation"
+            onClick={navigate}
+            className="mt-4 block bg-[#004AAD] hover:bg-[#003a8c] text-white font-semibold px-5 py-3 rounded-full shadow-md text-center transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-[#004AAD]/50"
+          >
+            Book a Consultation
+          </a>
         </div>
-      )}
+      </div>
     </header>
   );
 }
