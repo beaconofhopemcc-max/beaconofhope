@@ -177,7 +177,7 @@ export default function TeamPage() {
               href="/book-consultation"
               className="bg-[#7D5F42] hover:bg-[#6a4f35] text-white font-semibold px-8 sm:px-10 py-3 rounded-full shadow-md transition-all duration-300 hover:scale-[1.05]"
             >
-              Book a Consultation
+              Book a Consultations
             </a>
           </motion.div>
         </section>
