@@ -11,48 +11,29 @@ const fadeUp = {
 };
 
 export default function InsurancePage() {
-  const [videoVisible, setVideoVisible] = useState(false);
-  const heroRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setVideoVisible(true);
-            observer.disconnect();
-          }
-        });
-      },
-      { rootMargin: "200px" }
-    );
-    if (heroRef.current) observer.observe(heroRef.current);
-    return () => observer.disconnect();
-  }, []);
+  // Removed videoVisible state and related useEffect/useRef as per request
+  // to always show the video and remove the placeholder div.
 
   return (
     <>
       <Header />
 
-      <main className="bg-white text-gray-800 overflow-hidden pt-20">
+      <main className="bg-white text-gray-800 overflow-hidden">
         {/* === HERO SECTION === */}
         <section
-          ref={heroRef}
-          className="relative w-full h-[80vh] flex items-center justify-center overflow-hidden"
+          // 1. MODIFICATION: Changed h-[80vh] to h-[50vh] on mobile, keeping 80vh for md screens and up.
+          className="relative w-full h-[50vh] md:h-[80vh] flex items-center justify-center overflow-hidden"
         >
-          {videoVisible ? (
-            <video
-              src="/insurance.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="none"
-              className="absolute inset-0 w-full h-full object-cover"
-            ></video>
-          ) : (
-            <div className="absolute inset-0 bg-[#004AAD]/10" />
-          )}
+          {/* Video is now rendered unconditionally to ensure it's always visible and not blurred/delayed by a placeholder */}
+          <video
+            src="/insurance.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            // preload="none" // Removed preload="none" for faster display
+            className="absolute inset-0 w-full h-full object-cover"
+          ></video>
 
           <div className="relative z-10 text-center px-6 md:px-12 max-w-3xl">
             <motion.h1
@@ -76,6 +57,8 @@ export default function InsurancePage() {
           </div>
         </section>
 
+        {/* --- */}
+
         {/* === INSURANCE IMAGE SECTION === */}
         <section className="relative py-20 px-6 md:px-12 lg:px-20 bg-[#f9fafb]">
           <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -85,13 +68,17 @@ export default function InsurancePage() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="relative w-full h-[65vh] md:h-[75vh] rounded-3xl overflow-hidden shadow-lg"
+              // 2. MODIFICATION: Replaced fixed height (h-[65vh] md:h-[75vh]) 
+              // with a more adaptive aspect ratio (aspect-video) for the container.
+              // This is necessary because object-contain respects the full size of the container.
+              className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-lg"
             >
               <Image
                 src="/insurance1.png"
                 alt="Accepted insurance at Beacon of Hope Psychiatry"
                 fill
-                className="object-cover object-center"
+                className="object-contain object-center"
+                // object-contain is correct to ensure the full image is shown
                 priority
               />
             </motion.div>
@@ -132,6 +119,8 @@ export default function InsurancePage() {
             </motion.div>
           </div>
         </section>
+
+        {/* --- */}
 
         {/* === CTA SECTION === */}
         <section className="relative w-full py-24 flex items-center justify-center overflow-hidden bg-[#004AAD] text-white text-center px-6">

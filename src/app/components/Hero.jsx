@@ -68,7 +68,7 @@ export default function Hero() {
       <div className="flex flex-col md:hidden w-full min-h-screen">
         
         {/* Video at the Top (50vh height) */}
-        <div className="relative w-full h-[50vh]">
+        <div className="relative w-full h-[30vh]">
           <video
             ref={videoRef}
             src="/hero.mp4"

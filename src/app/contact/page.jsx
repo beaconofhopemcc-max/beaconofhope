@@ -34,11 +34,19 @@ export default function ContactPage() {
     <>
       <Header />
 
-      <main className="bg-white text-gray-800 overflow-hidden pt-20">
+      <main className="bg-white text-gray-800 overflow-hidden">
+        {/*
+          1. MODIFICATION: The 'pt-20' class was removed from the <main> element,
+             which was causing extra space at the top of the hero section.
+             The default 'mt-0' will be used, relying on the header for spacing.
+        */}
+        
         {/* === HERO SECTION === */}
         <section
           ref={heroRef}
-          className="relative w-full h-[80vh] flex items-center justify-center overflow-hidden"
+          // 2. MODIFICATION: Reduced hero height on mobile (h-[80vh] -> h-[55vh])
+          // to allow the full video and content to be seen more easily.
+          className="relative w-full h-[55vh] md:h-[80vh] flex items-center justify-center overflow-hidden"
         >
           {videoVisible ? (
             <video
@@ -85,13 +93,17 @@ export default function ContactPage() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="relative w-full h-[60vh] md:h-[75vh] rounded-3xl overflow-hidden shadow-lg"
+              // 3. MODIFICATION: Changed object-cover to object-contain for the Image.
+              // To remove extra top/bottom padding and show the full image,
+              // we change the container height from fixed h-[60vh] to an aspect ratio.
+              className="relative w-full aspect-[4/3] md:aspect-[3/4] rounded-3xl overflow-hidden shadow-lg"
             >
               <Image
                 src="/contact1.png"
                 alt="Contact Beacon of Hope Psychiatry"
                 fill
-                className="object-cover object-center"
+                // object-contain ensures the entire image content is visible
+                className="object-contain object-center"
                 priority
               />
             </motion.div>
