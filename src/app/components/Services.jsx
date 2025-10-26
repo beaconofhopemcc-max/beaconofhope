@@ -65,22 +65,30 @@ export default function Services() {
         ))}
       </div>
 
-      {/* === CONDITIONS WE TREAT === */}
+      {/* === CONDITIONS WE TREAT (OVERLAY REMOVED) === */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {conditions.map((condition, index) => (
           <div
             key={index}
-            className="relative overflow-hidden rounded-2xl group shadow-lg transition-all duration-500 hover:shadow-[0_0_25px_#7D5F42]/30"
+            // Removed group-hover:shadow-[0_0_25px_#7D5F42]/30 to slightly reduce hover effect
+            className="relative overflow-hidden rounded-2xl group shadow-lg transition-all duration-500" 
           >
             <Image
               src={condition.img}
               alt={condition.name}
               width={600}
               height={400}
-              className="object-cover w-full h-[260px] transform group-hover:scale-110 transition-transform duration-700"
+              // Kept the scale-up on hover for a nice effect
+              className="object-cover w-full h-[260px] transform group-hover:scale-110 transition-transform duration-700" 
             />
-            <div className="absolute inset-0 bg-[#004AAD]/40 group-hover:bg-[#004AAD]/50 transition-all duration-500"></div>
-            <div className="absolute inset-0 flex items-center justify-center">
+            
+            {/* 🛑 THIS DIV WAS THE OVERLAY AND IS NOW REMOVED */}
+            {/* <div className="absolute inset-0 bg-[#004AAD]/40 group-hover:bg-[#004AAD]/50 transition-all duration-500"></div> */}
+            
+            <div 
+              // Added a subtle dark gradient to ensure the text is readable on light images
+              className="absolute inset-0 flex items-end justify-start p-6 bg-gradient-to-t from-black/60 via-black/10 to-transparent"
+            >
               <h4 className="text-white text-2xl font-semibold drop-shadow-lg">
                 {condition.name}
               </h4>
@@ -89,11 +97,12 @@ export default function Services() {
         ))}
       </div>
 
-      {/* === VIEW ALL CTA === */}
+      {/* === VIEW ALL CTA (MODIFIED TO LINK TO /services) === */}
       <div className="mt-16 text-center">
-        <button className="bg-[#004AAD] hover:bg-[#003a8c] text-white font-semibold px-10 py-3 rounded-full shadow-md transition-all duration-300 hover:scale-[1.03]">
+        <a href="/services"
+           className="inline-block bg-[#004AAD] hover:bg-[#003a8c] text-white font-semibold px-10 py-3 rounded-full shadow-md transition-all duration-300 hover:scale-[1.03]">
           View All Services & Conditions
-        </button>
+        </a>
       </div>
     </section>
   );

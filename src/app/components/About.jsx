@@ -42,9 +42,12 @@ export default function About() {
           At Beacon of Hope, every story matters, and every life deserves light.
         </p>
 
-        <button className="mt-8 bg-[#004AAD] hover:bg-[#003a8c] text-white font-semibold px-8 py-3 rounded-full shadow-md transition-all duration-300 hover:scale-[1.03]">
+        {/* === BUTTON MODIFICATION START === */}
+        <a href="/team"
+           className="inline-block mt-8 bg-[#004AAD] hover:bg-[#003a8c] text-white font-semibold px-8 py-3 rounded-full shadow-md transition-all duration-300 hover:scale-[1.03]">
           Meet Our Team
-        </button>
+        </a>
+        {/* === BUTTON MODIFICATION END === */}
       </div>
     </section>
   );

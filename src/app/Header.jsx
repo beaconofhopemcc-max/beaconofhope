@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-// Removed Next.js specific imports (Image and Link) and replaced them with standard HTML/React elements.
 import { Menu, X, ChevronDown } from "lucide-react";
 
 export default function Header() {
@@ -8,35 +7,32 @@ export default function Header() {
   const [aboutOpen, setAboutOpen] = useState(false);
   const [conditionsOpen, setConditionsOpen] = useState(false);
 
-  // Helper function to handle navigation and close menu in mobile view
   const navigate = () => {
-    // Closes the main menu and both sub-menus when a link is clicked
     setMenuOpen(false);
     setAboutOpen(false);
     setConditionsOpen(false);
   };
 
-  // Helper to ensure the main menu toggle also closes sub-menus when collapsing
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
-    // Optionally close sub-menus when the main menu closes
     if (menuOpen) {
-        setAboutOpen(false);
-        setConditionsOpen(false);
+      setAboutOpen(false);
+      setConditionsOpen(false);
     }
   };
 
   return (
-    // Header uses Inter font and is static (non-sticky) as requested
     <header className="w-full bg-white shadow-lg font-[Inter]">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 py-3 md:py-4">
-        {/* === LOGO ONLY (now using <a> and <img>) === */}
-        <a href="/" className="flex items-center rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004AAD]/50">
-          {/* Using a placeholder image URL that represents a logo, since local assets are unavailable */}
+        {/* === LOGO ONLY === */}
+        <a
+          href="/"
+          className="flex items-center rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004AAD]/50"
+        >
           <img
-            src="https://placehold.co/60x60/004AAD/ffffff?text=BOH"
+            src="/logo.png"
             alt="Beacon of Hope Psychiatry Logo"
-            width={60}
+            width={180}
             height={60}
             className="object-contain rounded-full"
           />
@@ -44,7 +40,10 @@ export default function Header() {
 
         {/* === DESKTOP MENU === */}
         <nav className="hidden md:flex items-center space-x-6 lg:space-x-8 text-gray-700 font-medium">
-          <a href="/" className="hover:text-[#004AAD] transition-colors rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004AAD]/50 p-1">
+          <a
+            href="/"
+            className="hover:text-[#004AAD] transition-colors rounded-lg focus:outline-none focus:ring-2 focus:ring-[#004AAD]/50 p-1"
+          >
             Home
           </a>
 
@@ -158,14 +157,20 @@ export default function Header() {
 
       {/* === MOBILE MENU (DROPDOWN) === */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ${menuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"}`}
+        className={`md:hidden overflow-hidden transition-all duration-300 ${
+          menuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
+        }`}
       >
         <div className="flex flex-col px-4 sm:px-6 py-4 space-y-2 text-gray-700 font-medium border-t border-gray-200">
-          <a href="/" onClick={navigate} className="block w-full py-2 hover:bg-[#004AAD]/10 hover:text-[#004AAD] rounded-lg px-2">
+          <a
+            href="/"
+            onClick={navigate}
+            className="block w-full py-2 hover:bg-[#004AAD]/10 hover:text-[#004AAD] rounded-lg px-2"
+          >
             Home
           </a>
 
-          {/* ABOUT DROPDOWN (MOBILE) - Now with rotating chevron */}
+          {/* ABOUT DROPDOWN (MOBILE) */}
           <div className="border-b border-gray-100 pb-2">
             <button
               onClick={() => setAboutOpen(!aboutOpen)}
@@ -173,22 +178,32 @@ export default function Header() {
             >
               About
               <ChevronDown
-                className={`w-5 h-5 transition-transform duration-200 ${aboutOpen ? "rotate-180" : "rotate-0"}`}
+                className={`w-5 h-5 transition-transform duration-200 ${
+                  aboutOpen ? "rotate-180" : "rotate-0"
+                }`}
               />
             </button>
             {aboutOpen && (
               <div className="pl-6 mt-1 space-y-1 text-sm bg-gray-50 rounded-lg py-1">
-                <a href="/about" onClick={navigate} className="block w-full py-2 hover:text-[#004AAD] transition-colors px-2">
+                <a
+                  href="/about"
+                  onClick={navigate}
+                  className="block w-full py-2 hover:text-[#004AAD] transition-colors px-2"
+                >
                   About Us
                 </a>
-                <a href="/team" onClick={navigate} className="block w-full py-2 hover:text-[#004AAD] transition-colors px-2">
+                <a
+                  href="/team"
+                  onClick={navigate}
+                  className="block w-full py-2 hover:text-[#004AAD] transition-colors px-2"
+                >
                   Our Team
                 </a>
               </div>
             )}
           </div>
 
-          {/* CONDITIONS DROPDOWN (MOBILE) - Now with rotating chevron */}
+          {/* CONDITIONS DROPDOWN (MOBILE) */}
           <div className="border-b border-gray-100 pb-2">
             <button
               onClick={() => setConditionsOpen(!conditionsOpen)}
@@ -196,7 +211,9 @@ export default function Header() {
             >
               Conditions
               <ChevronDown
-                className={`w-5 h-5 transition-transform duration-200 ${conditionsOpen ? "rotate-180" : "rotate-0"}`}
+                className={`w-5 h-5 transition-transform duration-200 ${
+                  conditionsOpen ? "rotate-180" : "rotate-0"
+                }`}
               />
             </button>
             {conditionsOpen && (
@@ -223,21 +240,35 @@ export default function Header() {
             )}
           </div>
 
-          {/* Remaining links */}
-          <a href="/services" onClick={navigate} className="block w-full py-2 hover:bg-[#004AAD]/10 hover:text-[#004AAD] rounded-lg px-2">
+          <a
+            href="/services"
+            onClick={navigate}
+            className="block w-full py-2 hover:bg-[#004AAD]/10 hover:text-[#004AAD] rounded-lg px-2"
+          >
             Services
           </a>
-          <a href="/contact" onClick={navigate} className="block w-full py-2 hover:bg-[#004AAD]/10 hover:text-[#004AAD] rounded-lg px-2">
+          <a
+            href="/contact"
+            onClick={navigate}
+            className="block w-full py-2 hover:bg-[#004AAD]/10 hover:text-[#004AAD] rounded-lg px-2"
+          >
             Contact
           </a>
-          <a href="/insurance" onClick={navigate} className="block w-full py-2 hover:bg-[#004AAD]/10 hover:text-[#004AAD] rounded-lg px-2">
+          <a
+            href="/insurance"
+            onClick={navigate}
+            className="block w-full py-2 hover:bg-[#004AAD]/10 hover:text-[#004AAD] rounded-lg px-2"
+          >
             Insurance
           </a>
-          <a href="/patient-intake" onClick={navigate} className="block w-full py-2 hover:bg-[#004AAD]/10 hover:text-[#004AAD] rounded-lg px-2">
+          <a
+            href="/patient-intake"
+            onClick={navigate}
+            className="block w-full py-2 hover:bg-[#004AAD]/10 hover:text-[#004AAD] rounded-lg px-2"
+          >
             Patient Intake
           </a>
 
-          {/* Book Consultation Button */}
           <a
             href="/book-consultation"
             onClick={navigate}

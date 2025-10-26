@@ -34,11 +34,12 @@ export default function SubstanceAbusePage() {
     <>
       <Header />
 
-      <main className="bg-white text-gray-800 overflow-hidden pt-20">
+      <main className="bg-white text-gray-800 overflow-hidden">
         {/* === HERO SECTION === */}
         <section
           ref={heroRef}
-          className="relative w-full h-[80vh] flex items-center justify-center overflow-hidden"
+          // MODIFIED: Adopted new Hero styles for mobile vertical padding and content alignment
+          className="relative w-full py-16 md:h-[80vh] flex items-start md:items-center justify-center overflow-hidden"
         >
           {videoVisible ? (
             <video
@@ -54,14 +55,16 @@ export default function SubstanceAbusePage() {
             <div className="absolute inset-0 bg-transparent" />
           )}
 
-          <div className="relative z-10 text-center px-6 md:px-12 max-w-3xl">
+          {/* MODIFIED: Added pt-8 for top padding on mobile */}
+          <div className="relative z-10 text-center px-6 md:px-12 max-w-4xl pt-8">
             <motion.h1
               variants={fadeUp}
               initial="hidden"
               animate="visible"
-              className="text-4xl md:text-6xl font-extrabold text-white drop-shadow-lg leading-tight"
+              // MODIFIED: Reduced mobile text size from text-4xl to text-3xl
+              className="text-3xl md:text-6xl font-extrabold text-white drop-shadow-lg leading-tight"
             >
-              Substance Use Recovery at Beacon of Hope Psychiatry
+              Substance Use
             </motion.h1>
             <motion.p
               variants={fadeUp}
@@ -76,43 +79,51 @@ export default function SubstanceAbusePage() {
           </div>
         </section>
 
-        {/* === INTRODUCTION === */}
-        <section className="max-w-5xl mx-auto py-20 px-6 md:px-12 lg:px-20 text-center md:text-left">
-          <motion.h2
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="text-3xl font-bold text-[#004AAD]"
-          >
-            Understanding Substance Use Disorders
-          </motion.h2>
-          <p className="mt-6 text-lg text-gray-700 leading-relaxed">
-            Substance use disorder is a complex condition that affects the brain,
-            emotions, and behavior. It’s not a moral failure — it’s a medical and
-            psychological condition that deserves compassionate, comprehensive care.
-            At Beacon of Hope Psychiatry, we focus on healing the person, not just
-            treating the addiction.
-          </p>
+        {/* === INTRODUCTION & IMAGE (NEW TWO-COLUMN LAYOUT) === */}
+        <section className="max-w-7xl mx-auto py-20 px-6 md:px-12 lg:px-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            
+            {/* TEXT COLUMN (Left on Desktop, Top on Mobile) */}
+            <div className="md:order-1 order-2 text-center md:text-left">
+              <motion.h2
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="text-3xl font-bold text-[#004AAD]"
+              >
+                Understanding Substance Use Disorders
+              </motion.h2>
+              <p className="mt-6 text-lg text-gray-700 leading-relaxed">
+                Substance use disorder is a complex condition that affects the brain,
+                emotions, and behavior. It’s not a moral failure — it’s a medical and
+                psychological condition that deserves compassionate, comprehensive care.
+                At Beacon of Hope Psychiatry, we focus on healing the person, not just
+                treating the addiction.
+              </p>
+            </div>
+
+            {/* IMAGE COLUMN (Right on Desktop, Bottom on Mobile) */}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              // MODIFIED: Changed aspect ratio to better suit a content section image
+              className="relative w-full aspect-[16/10] overflow-hidden rounded-xl shadow-xl md:order-2 order-1" 
+            >
+              <Image
+                src="/substance1.png" // Keep your substance image source
+                alt="Substance abuse recovery at Beacon of Hope Psychiatry"
+                fill
+                className="object-cover object-center"
+                priority
+              />
+              <div className="absolute inset-0 bg-black/10"></div>
+            </motion.div>
+          </div>
         </section>
 
-        {/* === IMAGE SECTION === */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="relative w-full h-[70vh] md:h-[80vh] overflow-hidden"
-        >
-          <Image
-            src="/substance1.png"
-            alt="Substance abuse recovery at Beacon of Hope Psychiatry"
-            fill
-            className="object-cover object-center"
-            priority
-          />
-          <div className="absolute inset-0 bg-black/20 md:bg-black/10"></div>
-        </motion.div>
 
         {/* === SYMPTOMS SECTION === */}
         <section className="bg-[#f9fafb] py-20 px-6 md:px-12 lg:px-20">
@@ -156,55 +167,87 @@ export default function SubstanceAbusePage() {
           </div>
         </section>
 
-        {/* === OUR APPROACH === */}
-        <section className="max-w-6xl mx-auto py-20 px-6 md:px-12 lg:px-20 relative">
-          <motion.h3
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="text-2xl font-semibold text-[#004AAD] text-center md:text-left"
-          >
-            Our Approach to Addiction Recovery
-          </motion.h3>
-          <p className="mt-6 text-lg text-gray-700 leading-relaxed text-center md:text-left">
-            We combine psychiatry, therapy, and holistic recovery support to address both
-            the mental and physical aspects of substance use. Each treatment plan is
-            personalized — focused on helping you rediscover stability and self-trust.
-          </p>
-
-          {/* === Connector Line === */}
-          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 top-[45%] w-[70%] h-[4px] rounded-full bg-gradient-to-r from-[#004AAD] via-[#7D5F42] to-[#004AAD] opacity-40"></div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 relative z-10">
-            {[
-              {
-                title: "Comprehensive Assessment",
-                desc: "We identify biological, psychological, and social factors influencing substance use, guiding precise diagnosis and treatment.",
-              },
-              {
-                title: "Medication-Assisted Treatment",
-                desc: "Safe and effective medications may be used to reduce cravings and withdrawal symptoms, supporting long-term recovery.",
-              },
-              {
-                title: "Therapeutic Guidance",
-                desc: "Through therapy, mindfulness, and relapse prevention, we help rebuild self-trust, confidence, and connection.",
-              },
-            ].map((item, i) => (
-              <motion.div
-                key={i}
+        {/* === OUR APPROACH (NEW TWO-COLUMN LAYOUT) === */}
+        <section className="max-w-7xl mx-auto py-20 px-6 md:px-12 lg:px-20 relative">
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            
+            {/* TEXT & SERVICE LIST COLUMN (Left on Desktop, Top on Mobile) */}
+            <div className="md:order-1 order-2">
+              <motion.h3
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                className="bg-white rounded-2xl p-8 shadow-lg border border-[#7D5F42]/20 hover:shadow-[0_0_20px_#7D5F42]/30 transition-all duration-500"
+                className="text-2xl font-semibold text-[#004AAD] text-center md:text-left"
               >
-                <h4 className="text-xl font-bold text-[#004AAD] mb-3">
-                  {item.title}
-                </h4>
-                <p className="text-gray-700 leading-relaxed">{item.desc}</p>
-              </motion.div>
-            ))}
+                Our Approach to Addiction Recovery
+              </motion.h3>
+              <p className="mt-6 text-lg text-gray-700 leading-relaxed text-center md:text-left">
+                We combine psychiatry, therapy, and holistic recovery support to address both
+                the mental and physical aspects of substance use. Each treatment plan is
+                personalized — focused on helping you rediscover stability and self-trust.
+              </p>
+
+              {/* === Connector Line (Adjusted for 2-column layout) === */}
+              <div className="hidden lg:block absolute left-[30%] transform translate-x-1/2 top-[60%] w-[30%] h-[4px] rounded-full bg-gradient-to-r from-[#004AAD] via-[#7D5F42] to-[#004AAD] opacity-40"></div>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-16 relative z-10">
+                {[
+                  {
+                    title: "Comprehensive Assessment",
+                    desc: "We identify biological, psychological, and social factors influencing substance use, guiding precise diagnosis and treatment.",
+                  },
+                  {
+                    title: "Targeted Medication Support", // Adjusted title to match the tone of the Anxiety page's list
+                    desc: "Safe and effective medications may be used to reduce cravings and withdrawal symptoms, supporting long-term recovery.",
+                  },
+                  {
+                    title: "Therapeutic Guidance",
+                    desc: "Through therapy, mindfulness, and relapse prevention, we help rebuild self-trust, confidence, and connection.",
+                  },
+                  // Adding a 4th point to maintain visual balance in the 2x2 grid on desktop, similar to a typical landing page
+                  {
+                    title: "Dual Diagnosis Care",
+                    desc: "Addressing co-occurring mental health issues (like anxiety or depression) alongside substance use for holistic healing.",
+                  },
+                ].map((item, i) => (
+                  <motion.div
+                    key={i}
+                    variants={fadeUp}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    className="bg-white rounded-2xl p-8 shadow-lg border border-[#7D5F42]/20 hover:shadow-[0_0_20px_#7D5F42]/30 transition-all duration-500"
+                  >
+                    <h4 className="text-xl font-bold text-[#004AAD] mb-3">
+                      {item.title}
+                    </h4>
+                    <p className="text-gray-700 leading-relaxed">{item.desc}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* NEW IMAGE COLUMN (Right on Desktop, Bottom on Mobile) */}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              // MODIFIED: New Aspect Ratio and hidden on mobile for the 2-column approach section
+              className="relative w-full aspect-[4/5] overflow-hidden rounded-2xl shadow-xl md:order-2 order-1 hidden md:block"
+            >
+              <Image
+                // Assuming you have a separate image for the substance abuse approach
+                src="/approach-substance.png" 
+                alt="Our comprehensive approach to addiction recovery"
+                fill
+                className="object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-black/10"></div>
+            </motion.div>
+
           </div>
         </section>
 
@@ -224,42 +267,6 @@ export default function SubstanceAbusePage() {
             walk beside you — empowering healing, restoring purpose, and helping you
             rebuild a future free from addiction.
           </p>
-        </section>
-
-        {/* === BRAND VIDEO SECTION === */}
-        <section className="relative bg-white py-20 px-6 md:px-12 lg:px-20 text-center">
-          <motion.h3
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="text-3xl font-bold text-[#004AAD]"
-          >
-            Watch the Beacon of Hope Story
-          </motion.h3>
-
-          <p className="mt-4 text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
-            See how our holistic care approach helps individuals rediscover strength and
-            freedom — one recovery at a time.
-          </p>
-
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="relative mt-12 mx-auto w-[90%] sm:w-[80%] md:w-[60%] lg:w-[50%] rounded-3xl overflow-hidden shadow-2xl"
-          >
-            <video
-              src="/video.mp4"
-              controls
-              playsInline
-              preload="metadata"
-              className="w-full h-auto rounded-3xl cursor-pointer transition-transform duration-500 hover:scale-[1.02]"
-              poster="/video-preview.jpg"
-            ></video>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent pointer-events-none"></div>
-          </motion.div>
         </section>
 
         {/* === CTA === */}

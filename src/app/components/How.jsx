@@ -15,7 +15,7 @@ export default function How() {
       desc: "Schedule your first appointment easily online or by phone. Choose a time that fits your schedule.",
     },
     {
-      // FIX: Changed UserHeart to HeartHandshake (the correct component name)
+      // FIX: Changed UserHeart to HeartHandshake to HeartHandshake (the correct component name)
       icon: <HeartHandshake className={`w-10 h-10 text-[${ACCENT_COLOR}]`} />,
       title: "Meet Your Clinician",
       desc: "Connect with our compassionate, licensed professionals who listen, assess, and guide your care journey.",
@@ -49,8 +49,8 @@ export default function How() {
             key={index}
             className={`relative bg-white text-[#004AAD] rounded-3xl p-8 shadow-xl transition-all duration-500 border-b-4 border-[${ACCENT_COLOR}] hover:shadow-[0_0_30px_${ACCENT_COLOR}]/50 hover:scale-[1.02]`}
           >
-            {/* Step Number Badge */}
-            <div className={`absolute -top-4 -right-4 w-12 h-12 flex items-center justify-center rounded-full bg-[${ACCENT_COLOR}] text-white text-xl font-bold shadow-lg`}>
+            {/* Step Number Badge - MODIFIED TO BROWN TEXT ON WHITE BACKGROUND */}
+            <div className={`absolute -top-4 -right-4 w-12 h-12 flex items-center justify-center rounded-full bg-white text-[${ACCENT_COLOR}] text-xl font-bold shadow-lg border-2 border-[${ACCENT_COLOR}]`}>
               {index + 1}
             </div>
 
@@ -72,13 +72,15 @@ export default function How() {
         ))}
       </div>
 
-      {/* === CTA === */}
+      {/* === CTA (MODIFIED TO LINK TO /book-consultation) === */}
       <div className="mt-20 text-center">
-        <button 
-          className={`bg-[${ACCENT_COLOR}] hover:bg-[#a37848] text-white font-semibold px-12 py-4 rounded-full text-lg shadow-xl shadow-[${ACCENT_COLOR}]/50 transition-all duration-300 hover:scale-[1.05] active:scale-[0.98] border border-white/20`}
+        {/* === BUTTON MODIFICATION START === */}
+        <a href="/book-consultation"
+          className={`inline-block bg-[${ACCENT_COLOR}] hover:bg-[#a37848] text-white font-semibold px-12 py-4 rounded-full text-lg shadow-xl shadow-[${ACCENT_COLOR}]/50 transition-all duration-300 hover:scale-[1.05] active:scale-[0.98] border border-white/20`}
         >
           Start Your Journey Today
-        </button>
+        </a>
+        {/* === BUTTON MODIFICATION END === */}
       </div>
     </section>
   );

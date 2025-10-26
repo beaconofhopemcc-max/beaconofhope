@@ -1,5 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+// Optional: If you wanted to use the Next.js Link component, 
+// you would import it here: import Link from 'next/link';
 
 export default function Hero() {
   const videoRef = useRef(null);
@@ -26,7 +28,7 @@ export default function Hero() {
     // Main section background is black for the desktop view but will be overridden for mobile
     <section className="w-full bg-black text-white overflow-hidden">
       
-      {/* === DESKTOP (text overlay on video) - KEPT ORIGINAL === */}
+      {/* === DESKTOP (text overlay on video) - MODIFIED BUTTON === */}
       {/* This section remains hidden on mobile (md:flex) */}
       <div className="hidden md:flex relative items-center justify-center h-[90vh]">
         <video
@@ -52,16 +54,17 @@ export default function Hero() {
           </p>
 
           <div className="mt-8">
-            <button className="bg-white hover:bg-[#f0f0f0] text-[#004AAD] font-semibold px-8 py-3 rounded-full shadow-xl transition-all duration-300 hover:scale-[1.03]">
+            {/* === DESKTOP BUTTON MODIFICATION START === */}
+            <a href="/book-consultation" 
+               className="inline-block bg-white hover:bg-[#f0f0f0] text-[#004AAD] font-semibold px-8 py-3 rounded-full shadow-xl transition-all duration-300 hover:scale-[1.03]">
               Book an Appointment
-            </button>
+            </a>
+            {/* === DESKTOP BUTTON MODIFICATION END === */}
           </div>
         </div>
       </div>
 
-      {/* === MOBILE (video first, white background, blue/brown text) - MODIFIED === 
-        This section is hidden on desktop (md:hidden)
-      */}
+      {/* === MOBILE (video first, white background, blue/brown text) - MODIFIED BUTTON === */}
       <div className="flex flex-col md:hidden w-full min-h-screen">
         
         {/* Video at the Top (50vh height) */}
@@ -96,9 +99,12 @@ export default function Hero() {
           </p>
           
           {/* Blue Button with White Text */}
-          <button className="bg-[#004AAD] hover:bg-[#003887] text-white font-semibold px-8 py-3 rounded-full shadow-lg transition-all duration-300 hover:scale-[1.03]">
+          {/* === MOBILE BUTTON MODIFICATION START === */}
+          <a href="/book-consultation"
+             className="inline-block bg-[#004AAD] hover:bg-[#003887] text-white font-semibold px-8 py-3 rounded-full shadow-lg transition-all duration-300 hover:scale-[1.03]">
             Book an Appointment
-          </button>
+          </a>
+          {/* === MOBILE BUTTON MODIFICATION END === */}
         </div>
       </div>
     </section>

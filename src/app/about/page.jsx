@@ -40,9 +40,9 @@ export default function AboutPage() {
     <>
       <Header />
 
-      {/* MODIFIED: The 'pt-20' class has been removed from the main tag. */}
+      {/* The 'pt-20' class has been removed from the main tag. */}
       <main ref={ref} className="bg-white text-gray-800 overflow-hidden relative">
-        
+
         {/* === SCROLL PROGRESS BAR === */}
         <motion.div
           className="fixed top-0 left-0 h-[4px] bg-gradient-to-r from-[#7D5F42] to-[#d1b08a] z-50 shadow-[0_0_10px_#7D5F42]/40 origin-left"
@@ -52,7 +52,8 @@ export default function AboutPage() {
         {/* === HERO VIDEO === */}
         <section
           ref={heroRef}
-          className="relative w-full h-[50vh] md:h-[90vh] flex items-center justify-center overflow-hidden"
+          // MODIFIED: Replaced fixed height with responsive padding/height for consistent mobile scaling
+          className="relative w-full h-[70vh] md:h-[80vh] flex items-center justify-center overflow-hidden"
         >
           {videoVisible ? (
             <video
@@ -70,12 +71,13 @@ export default function AboutPage() {
           )}
 
           {/* === Content === */}
-          <div className="relative z-10 text-center px-6 md:px-12 max-w-3xl">
+          <div className="relative z-10 text-center px-6 md:px-12 max-w-3xl py-24">
             <motion.h1
               variants={fadeUp}
               initial="hidden"
               animate="visible"
-              className="text-4xl md:text-6xl font-extrabold text-white drop-shadow-lg"
+              // MODIFIED: Reduced mobile text size from text-4xl to text-3xl
+              className="text-3xl md:text-6xl font-extrabold text-white drop-shadow-lg"
             >
               About Beacon of Hope Psychiatry
             </motion.h1>
@@ -238,7 +240,12 @@ export default function AboutPage() {
             viewport={{ once: true }}
             className="px-6 md:px-12 max-w-3xl"
           >
-            <h2 className="text-4xl font-bold mb-4">Ready to Begin Your Healing Journey?</h2>
+            <h2 
+              // MODIFIED: Adjusted for consistent mobile/desktop scaling
+              className="text-3xl sm:text-4xl font-bold mb-4"
+            >
+              Ready to Begin Your Healing Journey?
+            </h2>
             <p className="text-lg text-gray-100 mb-8">
               Take the next step with our compassionate experts. Your path to clarity and balance starts here.
             </p>

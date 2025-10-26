@@ -7,13 +7,14 @@ export default function Insurances() {
       {/* === IMAGE === */}
       <div className="relative w-full max-w-4xl mx-auto h-[300px] md:h-[400px] rounded-3xl overflow-hidden shadow-md mb-8">
         <Image
-          src="/insurance.png"
+          src="/insurance1.png"
           alt="Insurance and Payment Options"
           fill
-          className="object-cover object-center rounded-3xl"
+          className="object-contain object-center rounded-3xl" // object-contain ensures full image is shown
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-white/60 to-transparent"></div>
+        {/* === OVERLAY DIV REMOVED HERE === */}
+        {/* <div className="absolute inset-0 bg-gradient-to-t from-white/60 to-transparent"></div> */}
       </div>
 
       {/* === TITLE === */}

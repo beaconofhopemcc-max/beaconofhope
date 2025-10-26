@@ -34,13 +34,11 @@ export default function TeamPage() {
     <>
       <Header />
 
-      {/* MODIFIED: Removed 'pt-20' class to eliminate space at the top */}
       <main className="bg-white text-gray-800 overflow-hidden">
         {/* === HERO SECTION === */}
         <section
           ref={heroRef}
-          // MODIFIED: Removed fixed 'h-[80vh]' for mobile, kept it dynamic (height set by content/padding), and used 'md:h-[80vh]' for desktop.
-          className="relative w-full py-24 md:h-[80vh] flex items-center justify-center overflow-hidden" 
+          className="relative w-full py-24 md:h-[80vh] flex items-center justify-center overflow-hidden"
         >
           {videoVisible ? (
             <video
@@ -85,18 +83,14 @@ export default function TeamPage() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            // MODIFIED: Removed fixed 'h-[400px]', 'sm:h-[450px]', 'md:h-[500px]' for mobile responsiveness.
-            // Using aspect-ratio utility for better control, or letting the Image component define height.
-            // Swapping 'fill' for defined width/height to make 'h-auto' work better on mobile.
             className="relative w-full sm:w-3/4 md:w-2/3 lg:w-1/2 aspect-[4/5] lg:h-[500px] rounded-3xl overflow-hidden shadow-xl mx-auto lg:mx-0"
           >
             <Image
               src="/profile.png"
               alt="Dr. Samuel Okechukwu Nwanekpe"
-              width={1000} // Added explicit width/height
-              height={1250} // Aspect ratio 4:5
-              // MODIFIED: Using object-cover to make sure the image scales to fit the container
-              className="object-cover object-top w-full h-full" 
+              width={1000}
+              height={1250}
+              className="object-cover object-top w-full h-full"
               priority
             />
           </motion.div>
@@ -128,18 +122,22 @@ export default function TeamPage() {
               </p>
 
               <p>
-                With over **20 years of nursing experience**, he has
+                With over <strong>20 years of nursing experience</strong>, he has
                 developed strong clinical skills and a heart for supporting patients
                 across the lifespan.
               </p>
 
               <p>
-                He holds a **Bachelor’s Degree in Nursing Science** and
-                earned his **Master’s Degree** from{" "}
-                **Walden University, Minneapolis (MN).** He completed
-                his **Doctor of Nursing Practice (DNP)** at{" "}
-                **Rush University, Chicago**, and is a{" "}
-                **board-certified Psychiatric and Mental Health Nurse Practitioner (PMHNP-BC).**
+                He holds a <strong>Bachelor’s Degree in Nursing Science</strong> and
+                earned his <strong>Master’s Degree</strong> from{" "}
+                <strong>Walden University, Minneapolis (MN)</strong>. He completed his{" "}
+                <strong>Doctor of Nursing Practice (DNP)</strong> at{" "}
+                <strong>Rush University, Chicago</strong>, and is a{" "}
+                <strong>
+                  board-certified Psychiatric and Mental Health Nurse Practitioner
+                  (PMHNP-BC)
+                </strong>
+                .
               </p>
 
               <p>

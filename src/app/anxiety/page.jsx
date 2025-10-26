@@ -34,11 +34,12 @@ export default function AnxietyPage() {
     <>
       <Header />
 
-      <main className="bg-white text-gray-800 overflow-hidden pt-20">
+      <main className="bg-white text-gray-800 overflow-hidden">
         {/* === HERO SECTION === */}
         <section
           ref={heroRef}
-          className="relative w-full h-[80vh] flex items-center justify-center overflow-hidden"
+          // MODIFIED: Reduced mobile vertical padding to py-16 and used items-start to top-align content
+          className="relative w-full py-16 md:h-[80vh] flex items-start md:items-center justify-center overflow-hidden" 
         >
           {videoVisible ? (
             <video
@@ -54,14 +55,15 @@ export default function AnxietyPage() {
             <div className="absolute inset-0 bg-transparent" />
           )}
 
-          <div className="relative z-10 text-center px-6 md:px-12 max-w-3xl">
+          {/* MODIFIED: Added pt-8 for top padding on mobile */}
+          <div className="relative z-10 text-center px-6 md:px-12 max-w-4xl pt-8">
             <motion.h1
               variants={fadeUp}
               initial="hidden"
               animate="visible"
               className="text-4xl md:text-6xl font-extrabold text-white drop-shadow-lg leading-tight"
             >
-              Anxiety Care at Beacon of Hope Psychiatry
+              Anxiety
             </motion.h1>
             <motion.p
               variants={fadeUp}
@@ -76,42 +78,50 @@ export default function AnxietyPage() {
           </div>
         </section>
 
-        {/* === INTRODUCTION === */}
-        <section className="max-w-5xl mx-auto py-20 px-6 md:px-12 lg:px-20 text-center md:text-left">
-          <motion.h2
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="text-3xl font-bold text-[#004AAD]"
-          >
-            Understanding Anxiety
-          </motion.h2>
-          <p className="mt-6 text-lg text-gray-700 leading-relaxed">
-            Anxiety isn’t just worry — it’s a deep state of alertness that can make you feel
-            tense, restless, or unable to relax. It often appears when your body and mind
-            feel unsafe, even in calm environments. At Beacon of Hope Psychiatry, we help
-            you retrain your mind and body to feel secure again.
-          </p>
+        {/* === INTRODUCTION & IMAGE (SWAPPED ON DESKTOP) === */}
+        <section className="max-w-7xl mx-auto py-20 px-6 md:px-12 lg:px-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            
+            {/* TEXT COLUMN (Left on Desktop, Top on Mobile) */}
+            <div className="md:order-1 order-2 text-center md:text-left">
+              <motion.h2
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="text-3xl font-bold text-[#004AAD]"
+              >
+                Understanding Anxiety
+              </motion.h2>
+              <p className="mt-6 text-lg text-gray-700 leading-relaxed">
+                Anxiety isn’t just worry — it’s a deep state of alertness that can make you feel
+                tense, restless, or unable to relax. It often appears when your body and mind
+                feel unsafe, even in calm environments. At Beacon of Hope Psychiatry, we help
+                you retrain your mind and body to feel secure again.
+              </p>
+            </div>
+
+            {/* IMAGE COLUMN (Right on Desktop, Bottom on Mobile) */}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="relative w-full aspect-[16/10] overflow-hidden rounded-xl shadow-xl md:order-2 order-1" 
+            >
+              <Image
+                src="/anxiety1.png"
+                alt="Anxiety treatment at Beacon of Hope Psychiatry"
+                fill
+                className="object-cover object-center"
+                priority
+              />
+              <div className="absolute inset-0 bg-black/10"></div>
+            </motion.div>
+          </div>
         </section>
 
-        {/* === IMAGE SECTION === */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="relative w-full h-[70vh] md:h-[80vh] overflow-hidden"
-        >
-          <Image
-            src="/anxiety1.png"
-            alt="Anxiety treatment at Beacon of Hope Psychiatry"
-            fill
-            className="object-cover object-center"
-            priority
-          />
-          <div className="absolute inset-0 bg-black/20 md:bg-black/10"></div>
-        </motion.div>
+        {/* Removed the separate IMAGE SECTION as it is now integrated above */}
 
         {/* === SYMPTOMS SECTION === */}
         <section className="bg-[#f9fafb] py-20 px-6 md:px-12 lg:px-20">
@@ -155,55 +165,81 @@ export default function AnxietyPage() {
           </div>
         </section>
 
-        {/* === OUR APPROACH === */}
-        <section className="max-w-6xl mx-auto py-20 px-6 md:px-12 lg:px-20 relative">
-          <motion.h3
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="text-2xl font-semibold text-[#004AAD] text-center md:text-left"
-          >
-            Our Approach to Treating Anxiety
-          </motion.h3>
-          <p className="mt-6 text-lg text-gray-700 leading-relaxed text-center md:text-left">
-            Our anxiety care plans combine therapeutic support and medical expertise to
-            restore emotional balance. We help you understand your triggers and strengthen
-            your nervous system’s ability to stay calm under stress.
-          </p>
-
-          {/* === Connector Line === */}
-          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 top-[45%] w-[70%] h-[4px] rounded-full bg-gradient-to-r from-[#004AAD] via-[#7D5F42] to-[#004AAD] opacity-40"></div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 relative z-10">
-            {[
-              {
-                title: "Comprehensive Assessment",
-                desc: "We explore medical, emotional, and lifestyle factors contributing to anxiety to design an accurate diagnosis and plan.",
-              },
-              {
-                title: "Targeted Medication Support",
-                desc: "When necessary, medications are used thoughtfully to ease overwhelming symptoms and promote stability.",
-              },
-              {
-                title: "Therapeutic Guidance",
-                desc: "Through CBT, mindfulness, and coping techniques, we help you rewire anxious thought patterns into clarity and calm.",
-              },
-            ].map((item, i) => (
-              <motion.div
-                key={i}
+        {/* === OUR APPROACH (MODIFIED TO INCLUDE IMAGE) === */}
+        {/* MODIFIED: Changed max-w to 7xl and added responsive grid layout with approach.png */}
+        <section className="max-w-7xl mx-auto py-20 px-6 md:px-12 lg:px-20 relative">
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            
+            {/* TEXT & SERVICE LIST COLUMN (Left on Desktop, Top on Mobile) */}
+            <div className="md:order-1 order-2">
+              <motion.h3
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                className="bg-white rounded-2xl p-8 shadow-lg border border-[#7D5F42]/20 hover:shadow-[0_0_20px_#7D5F42]/30 transition-all duration-500"
+                className="text-2xl font-semibold text-[#004AAD] text-center md:text-left"
               >
-                <h4 className="text-xl font-bold text-[#004AAD] mb-3">
-                  {item.title}
-                </h4>
-                <p className="text-gray-700 leading-relaxed">{item.desc}</p>
-              </motion.div>
-            ))}
+                Our Approach to Treating Anxiety
+              </motion.h3>
+              <p className="mt-6 text-lg text-gray-700 leading-relaxed text-center md:text-left">
+                Our anxiety care plans combine therapeutic support and medical expertise to
+                restore emotional balance. We help you understand your triggers and strengthen
+                your nervous system’s ability to stay calm under stress.
+              </p>
+
+              {/* === Connector Line (Hidden on Mobile/Small Desktop) === */}
+              <div className="hidden lg:block absolute left-[30%] transform translate-x-1/2 top-[60%] w-[30%] h-[4px] rounded-full bg-gradient-to-r from-[#004AAD] via-[#7D5F42] to-[#004AAD] opacity-40"></div>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-16 relative z-10">
+                {[
+                  {
+                    title: "Comprehensive Assessment",
+                    desc: "We explore medical, emotional, and lifestyle factors contributing to anxiety to design an accurate diagnosis and plan.",
+                  },
+                  {
+                    title: "Targeted Medication Support",
+                    desc: "When necessary, medications are used thoughtfully to ease overwhelming symptoms and promote stability.",
+                  },
+                  {
+                    title: "Therapeutic Guidance",
+                    desc: "Through CBT, mindfulness, and coping techniques, we help you rewire anxious thought patterns into clarity and calm.",
+                  },
+                ].map((item, i) => (
+                  <motion.div
+                    key={i}
+                    variants={fadeUp}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    className="bg-white rounded-2xl p-8 shadow-lg border border-[#7D5F42]/20 hover:shadow-[0_0_20px_#7D5F42]/30 transition-all duration-500"
+                  >
+                    <h4 className="text-xl font-bold text-[#004AAD] mb-3">
+                      {item.title}
+                    </h4>
+                    <p className="text-gray-700 leading-relaxed">{item.desc}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* NEW IMAGE COLUMN (Right on Desktop, Bottom on Mobile) */}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="relative w-full aspect-[4/5] overflow-hidden rounded-2xl shadow-xl md:order-2 order-1 hidden md:block" // Hidden on mobile
+            >
+              <Image
+                src="/approach.png"
+                alt="Our comprehensive approach to anxiety treatment"
+                fill
+                className="object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-black/10"></div>
+            </motion.div>
+
           </div>
         </section>
 
@@ -225,41 +261,7 @@ export default function AnxietyPage() {
           </p>
         </section>
 
-        {/* === BRAND VIDEO SECTION === */}
-        <section className="relative bg-white py-20 px-6 md:px-12 lg:px-20 text-center">
-          <motion.h3
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="text-3xl font-bold text-[#004AAD]"
-          >
-            Watch the Beacon of Hope Story
-          </motion.h3>
-
-          <p className="mt-4 text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
-            Discover how our compassionate approach to mental health is transforming lives,
-            one step at a time.
-          </p>
-
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="relative mt-12 mx-auto w-[90%] sm:w-[80%] md:w-[60%] lg:w-[50%] rounded-3xl overflow-hidden shadow-2xl"
-          >
-            <video
-              src="/video.mp4"
-              controls
-              playsInline
-              preload="metadata"
-              className="w-full h-auto rounded-3xl cursor-pointer transition-transform duration-500 hover:scale-[1.02]"
-              poster="/video-preview.jpg"
-            ></video>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent pointer-events-none"></div>
-          </motion.div>
-        </section>
+        {/* REMOVED: The BRAND VIDEO SECTION has been removed. */}
 
         {/* === CTA === */}
         <section className="relative w-full py-24 flex items-center justify-center overflow-hidden bg-[#004AAD] text-white text-center px-6">
