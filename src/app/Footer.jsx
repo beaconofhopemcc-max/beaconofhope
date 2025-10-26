@@ -187,7 +187,7 @@ const Footer = () => {
             href="/terms-of-service"
             className={`hover:text-[${BRAND_BLUE}] transition-colors duration-300`}
           >
-            Terms of Service
+            Terms of Services
           </Link>
         </div>
       </div>
