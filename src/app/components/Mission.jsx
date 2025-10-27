@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { HeartPulse, Trophy, Stethoscope } from "lucide-react"; // ✅ Correct icons
 
 export default function Mission() {
@@ -17,18 +18,37 @@ export default function Mission() {
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-white/90"></div>
       </div>
 
-      {/* === Section Title === */}
+      {/* === Section Title with Slide-Up Animation === */}
       <div className="text-center mb-16">
-        <h2 className="text-3xl md:text-4xl font-bold text-[#004AAD]">
+        <motion.h2
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="text-3xl md:text-4xl font-bold text-[#004AAD]"
+        >
           Our Mission, Vision & Core Values
-        </h2>
-        <div className="mt-3 w-28 h-[4px] mx-auto bg-gradient-to-r from-[#7D5F42] to-[#d1b08a] rounded-full shadow-[0_0_12px_#7D5F42]/40"></div>
+        </motion.h2>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: "easeOut", delay: 0.1 }}
+          viewport={{ once: true }}
+          className="mt-3 w-28 h-[4px] mx-auto bg-gradient-to-r from-[#7D5F42] to-[#d1b08a] rounded-full shadow-[0_0_12px_#7D5F42]/40"
+        ></motion.div>
       </div>
 
       {/* === Cards Grid === */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
         {/* === MISSION CARD === */}
-        <div className="relative group bg-white rounded-2xl border border-[#7D5F42]/40 shadow-lg p-8 transition-all duration-500 hover:shadow-[0_0_25px_#7D5F42]/40">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="relative group bg-white rounded-2xl border border-[#7D5F42]/40 shadow-lg p-8 transition-all duration-500 hover:shadow-[0_0_25px_#7D5F42]/40"
+        >
           <div className="flex flex-col sm:flex-row items-start sm:items-center sm:space-x-4 mb-4">
             <div className="relative mb-4 sm:mb-0">
               <div className="w-12 h-12 rounded-full bg-[#7D5F42] flex items-center justify-center animate-pulse shadow-md">
@@ -50,10 +70,16 @@ export default function Mission() {
           >
             Learn More
           </Link>
-        </div>
+        </motion.div>
 
         {/* === VISION CARD === */}
-        <div className="relative group bg-white rounded-2xl border border-[#7D5F42]/40 shadow-lg p-8 transition-all duration-500 hover:shadow-[0_0_25px_#7D5F42]/40">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
+          viewport={{ once: true }}
+          className="relative group bg-white rounded-2xl border border-[#7D5F42]/40 shadow-lg p-8 transition-all duration-500 hover:shadow-[0_0_25px_#7D5F42]/40"
+        >
           <div className="flex flex-col sm:flex-row items-start sm:items-center sm:space-x-4 mb-4">
             <div className="relative mb-4 sm:mb-0">
               <div className="w-12 h-12 rounded-full bg-[#7D5F42] flex items-center justify-center animate-pulse shadow-md">
@@ -74,10 +100,16 @@ export default function Mission() {
           >
             Learn More
           </Link>
-        </div>
+        </motion.div>
 
         {/* === CORE VALUES CARD === */}
-        <div className="relative group bg-white rounded-2xl border border-[#7D5F42]/40 shadow-lg p-8 transition-all duration-500 hover:shadow-[0_0_25px_#7D5F42]/40">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+          viewport={{ once: true }}
+          className="relative group bg-white rounded-2xl border border-[#7D5F42]/40 shadow-lg p-8 transition-all duration-500 hover:shadow-[0_0_25px_#7D5F42]/40"
+        >
           <div className="flex flex-col sm:flex-row items-start sm:items-center sm:space-x-4 mb-4">
             <div className="relative mb-4 sm:mb-0">
               <div className="w-12 h-12 rounded-full bg-[#7D5F42] flex items-center justify-center animate-pulse shadow-md">
@@ -98,7 +130,7 @@ export default function Mission() {
           >
             Learn More
           </Link>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
