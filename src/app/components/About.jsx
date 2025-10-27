@@ -28,7 +28,7 @@ export default function About() {
         <p className="text-gray-700 text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
           Beacon of Hope Psychiatry is a modern center for mental-wellness,
           designed to bring calm, clarity, and compassionate care to every individual.
-          We blend clinical excellence with human connection, creating a space
+          We blend clinical excellence with human connection, creating the space
           where healing feels natural and hope feels real.
         </p>
 
