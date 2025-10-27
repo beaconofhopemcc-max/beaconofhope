@@ -169,7 +169,7 @@ export default function ContactPage() {
             </h2>
             <p className="text-base sm:text-lg text-gray-100 mb-8 leading-relaxed">
               Explore our range of compassionate mental health services — from psychiatric
-              evaluation to therapy and medical cannabis care.
+              evaluation to therapy and medical cannabis care..
             </p>
             <a
               href="/services"
