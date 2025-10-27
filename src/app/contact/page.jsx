@@ -175,7 +175,7 @@ export default function ContactPage() {
               href="/services"
               className="bg-[#7D5F42] hover:bg-[#6a4f35] text-white font-semibold px-8 sm:px-10 py-3 rounded-full shadow-md transition-all duration-300 hover:scale-[1.05]"
             >
-              View Our Services.
+              View Our Services.f
             </a>
           </motion.div>
         </section>
