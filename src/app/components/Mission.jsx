@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { HeartPulse, Eye, Sparkles } from "lucide-react";
+import { HeartPulse, Trophy, Stethoscope } from "lucide-react"; // ✅ Correct icons
 
 export default function Mission() {
   return (
@@ -28,11 +28,12 @@ export default function Mission() {
       {/* === Cards Grid === */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
         {/* === MISSION CARD === */}
-        <div className="relative group bg-white rounded-2xl border border-[#7D5F42]/50 shadow-lg p-8 transition-all duration-500 hover:shadow-[0_0_25px_#7D5F42]/40">
-          <div className="flex flex-col md:flex-col sm:flex-row items-start sm:items-center sm:space-x-4 mb-4">
+        <div className="relative group bg-white rounded-2xl border border-[#7D5F42]/40 shadow-lg p-8 transition-all duration-500 hover:shadow-[0_0_25px_#7D5F42]/40">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center sm:space-x-4 mb-4">
             <div className="relative mb-4 sm:mb-0">
-              <HeartPulse className="w-10 h-10 text-[#7D5F42] animate-pulse" />
-              <div className="absolute inset-0 rounded-full bg-[#7D5F42]/30 blur-md animate-ping"></div>
+              <div className="w-12 h-12 rounded-full bg-[#7D5F42] flex items-center justify-center animate-pulse shadow-md">
+                <HeartPulse className="w-6 h-6 text-white" />
+              </div>
             </div>
             <h3 className="text-2xl font-semibold text-[#004AAD]">Our Mission</h3>
           </div>
@@ -52,11 +53,12 @@ export default function Mission() {
         </div>
 
         {/* === VISION CARD === */}
-        <div className="relative group bg-white rounded-2xl border border-[#7D5F42]/50 shadow-lg p-8 transition-all duration-500 hover:shadow-[0_0_25px_#7D5F42]/40">
-          <div className="flex flex-col md:flex-col sm:flex-row items-start sm:items-center sm:space-x-4 mb-4">
+        <div className="relative group bg-white rounded-2xl border border-[#7D5F42]/40 shadow-lg p-8 transition-all duration-500 hover:shadow-[0_0_25px_#7D5F42]/40">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center sm:space-x-4 mb-4">
             <div className="relative mb-4 sm:mb-0">
-              <Eye className="w-10 h-10 text-[#7D5F42] animate-pulse" />
-              <div className="absolute inset-0 rounded-full bg-[#7D5F42]/30 blur-md animate-ping"></div>
+              <div className="w-12 h-12 rounded-full bg-[#7D5F42] flex items-center justify-center animate-pulse shadow-md">
+                <Trophy className="w-6 h-6 text-white" />
+              </div>
             </div>
             <h3 className="text-2xl font-semibold text-[#004AAD]">Our Vision</h3>
           </div>
@@ -75,11 +77,12 @@ export default function Mission() {
         </div>
 
         {/* === CORE VALUES CARD === */}
-        <div className="relative group bg-white rounded-2xl border border-[#7D5F42]/50 shadow-lg p-8 transition-all duration-500 hover:shadow-[0_0_25px_#7D5F42]/40">
-          <div className="flex flex-col md:flex-col sm:flex-row items-start sm:items-center sm:space-x-4 mb-4">
+        <div className="relative group bg-white rounded-2xl border border-[#7D5F42]/40 shadow-lg p-8 transition-all duration-500 hover:shadow-[0_0_25px_#7D5F42]/40">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center sm:space-x-4 mb-4">
             <div className="relative mb-4 sm:mb-0">
-              <Sparkles className="w-10 h-10 text-[#7D5F42] animate-pulse" />
-              <div className="absolute inset-0 rounded-full bg-[#7D5F42]/30 blur-md animate-ping"></div>
+              <div className="w-12 h-12 rounded-full bg-[#7D5F42] flex items-center justify-center animate-pulse shadow-md">
+                <Stethoscope className="w-6 h-6 text-white" />
+              </div>
             </div>
             <h3 className="text-2xl font-semibold text-[#004AAD]">Our Core Values</h3>
           </div>
