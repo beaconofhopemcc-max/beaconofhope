@@ -7,7 +7,7 @@ export default function About() {
       {/* === IMAGE COLUMN === */}
       <div className="relative w-full lg:w-1/2 h-[320px] md:h-[450px] overflow-hidden rounded-3xl shadow-lg">
         <Image
-          src="/Home2.png"
+          src="/come2.png"
           alt="Beacon of Hope Psychiatry"
           fill
           className="object-cover object-center rounded-3xl transition-transform duration-700 hover:scale-105"
