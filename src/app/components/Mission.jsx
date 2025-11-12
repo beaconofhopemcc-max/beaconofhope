@@ -18,7 +18,7 @@ export default function Mission() {
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-white/90"></div>
       </div>
 
-      {/* === Section Title with Slide-Up Animation === */}
+      {/* === Section Title === */}
       <div className="text-center mb-16">
         <motion.h2
           initial={{ opacity: 0, y: 40 }}
@@ -58,7 +58,8 @@ export default function Mission() {
             <h3 className="text-2xl font-semibold text-[#004AAD]">Our Mission</h3>
           </div>
 
-          <p className="text-gray-700 leading-relaxed mb-6">
+          {/* ✅ Justified paragraph */}
+          <p className="text-gray-700 leading-relaxed mb-6 text-justify">
             To deliver compassionate, evidence-based psychiatric care that restores
             balance, nurtures resilience, and helps every individual rediscover the
             peace they deserve.
@@ -89,7 +90,8 @@ export default function Mission() {
             <h3 className="text-2xl font-semibold text-[#004AAD]">Our Vision</h3>
           </div>
 
-          <p className="text-gray-700 leading-relaxed mb-6">
+          {/* ✅ Justified paragraph */}
+          <p className="text-gray-700 leading-relaxed mb-6 text-justify">
             To be a beacon of excellence in mental health care, where healing is holistic,
             accessible, and guided by empathy, innovation, and human connection.
           </p>
@@ -119,7 +121,8 @@ export default function Mission() {
             <h3 className="text-2xl font-semibold text-[#004AAD]">Our Core Values</h3>
           </div>
 
-          <p className="text-gray-700 leading-relaxed mb-6">
+          {/* ✅ Justified paragraph */}
+          <p className="text-gray-700 leading-relaxed mb-6 text-justify">
             Compassion, integrity, respect, and collaboration form the foundation of our work.
             We believe in meeting every patient with dignity, empathy, and genuine care.
           </p>

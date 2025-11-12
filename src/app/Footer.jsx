@@ -25,17 +25,15 @@ const PRIMARY_TEXT_COLOR = 'text-gray-800'; // For general black/dark text
 const SECONDARY_TEXT_COLOR = 'text-gray-600'; // For lightened text
 
 const Footer = () => {
-  // New Brand Description
-  const newBrandDescription = "Beacon of Hope Psychiatry is dedicated to providing compassionate, evidence-based mental health care that guides you toward clarity and wellness.";
-  
-  // New CTA Phrase
-  const newCTAPhrase = "Begin your path to peace today: schedule your first consultation and embrace a healthier future.";
+  const newBrandDescription =
+    "Beacon of Hope Psychiatry is dedicated to providing compassionate, evidence-based mental health care that guides you toward clarity and wellness.";
 
-  // Social Media Base URL
+  const newCTAPhrase =
+    "Begin your path to peace today: schedule your first consultation and embrace a healthier future.";
+
   const socialBaseUrl = '/beaconofhopemcc'; 
 
   return (
-    // MODIFIED: bg-white and text-black
     <footer
       className={`${inter.className} relative bg-white ${PRIMARY_TEXT_COLOR} pt-12 pb-6 px-6 overflow-hidden`}
     >
@@ -48,14 +46,13 @@ const Footer = () => {
             <Link href="/" className="flex justify-center md:justify-start">
               <Image
                 src="/logo.png"
-                alt="Beacon of Hope Psychiatry Logo" // MODIFIED: Alt text
+                alt="Beacon of Hope Psychiatry Logo"
                 width={220}
                 height={50}
-                // MODIFIED: Removed brightness-0 invert since the background is white
-                className="mb-4 transform transition-transform duration-300 hover:scale-105" 
+                className="mb-4 transform transition-transform duration-300 hover:scale-105"
               />
             </Link>
-            {/* MODIFIED: Brand text color and description */}
+
             <p className={`text-[15px] ${SECONDARY_TEXT_COLOR} leading-relaxed max-w-xs mx-auto md:mx-0 font-light`}>
               {newBrandDescription}
             </p>
@@ -63,22 +60,10 @@ const Footer = () => {
             {/* Social Icons */}
             <div className="flex justify-center md:justify-start space-x-5 pt-3">
               {[
-                {
-                  href: `https://www.instagram.com${socialBaseUrl}`, // MODIFIED: URL
-                  icon: <FaInstagram size={22} color={BRAND_BLUE} />, // MODIFIED: Color
-                },
-                {
-                  href: `https://www.facebook.com${socialBaseUrl}`, // MODIFIED: URL
-                  icon: <FaFacebook size={22} color={BRAND_BLUE} />, // MODIFIED: Color
-                },
-                {
-                  href: `https://x.com${socialBaseUrl}`, // MODIFIED: URL
-                  icon: <FaTwitter size={22} color={BRAND_BLUE} />, // MODIFIED: Color
-                },
-                {
-                  href: `https://www.youtube.com${socialBaseUrl}`, // MODIFIED: URL
-                  icon: <FaYoutube size={22} color={BRAND_BLUE} />, // MODIFIED: Color
-                },
+                { href: `https://www.instagram.com${socialBaseUrl}`, icon: <FaInstagram size={22} color={BRAND_BLUE} /> },
+                { href: `https://www.facebook.com${socialBaseUrl}`, icon: <FaFacebook size={22} color={BRAND_BLUE} /> },
+                { href: `https://x.com${socialBaseUrl}`, icon: <FaTwitter size={22} color={BRAND_BLUE} /> },
+                { href: `https://www.youtube.com${socialBaseUrl}`, icon: <FaYoutube size={22} color={BRAND_BLUE} /> },
               ].map(({ href, icon }) => (
                 <a
                   key={href}
@@ -95,23 +80,23 @@ const Footer = () => {
 
           {/* === Quick Links === */}
           <div className="text-center md:text-left">
-            {/* MODIFIED: Text color and border color */}
             <h3 className={`text-[18px] font-semibold mb-4 border-b-2 border-gray-800 inline-block pb-1 tracking-wide ${PRIMARY_TEXT_COLOR}`}>
               Quick Links
             </h3>
-            {/* MODIFIED: Text color and hover color (set to blue) */}
             <ul className={`space-y-3 ${SECONDARY_TEXT_COLOR} text-[15px] font-light`}>
               {[
-                ["About Us", "/about-us"],
+                ["About Us", "/about"],
                 ["Services", "/services"],
                 ["Reviews", "/reviews"],
-                ["Insurances", "/insurances"],
+                ["Insurances", "/insurance"],
                 ["Patient Intake", "/patient-intake"],
+                ["Resources", "/resources"],       // ✅ New item added
+                ["Policies", "/policies"],         // ✅ New item added
               ].map(([label, href]) => (
                 <li key={href}>
                   <Link
                     href={href}
-                    className={`hover:text-[${BRAND_BLUE}] block transition-colors duration-300`} // Using bracket syntax for Tailwind JIT
+                    className={`hover:text-[${BRAND_BLUE}] block transition-colors duration-300`}
                   >
                     {label}
                   </Link>
@@ -122,11 +107,9 @@ const Footer = () => {
 
           {/* === Contact Info === */}
           <div className="text-center md:text-left">
-            {/* MODIFIED: Text color and border color */}
             <h3 className={`text-[18px] font-semibold mb-4 border-b-2 border-gray-800 inline-block pb-1 tracking-wide ${PRIMARY_TEXT_COLOR}`}>
               Contact Us
             </h3>
-            {/* MODIFIED: Text color and icon color */}
             <ul className={`space-y-3 ${SECONDARY_TEXT_COLOR} text-[15px] font-light`}>
               <li className="flex flex-col sm:flex-row items-center sm:items-start sm:space-x-3">
                 <FaMapMarkerAlt className={`text-[${BRAND_BLUE}] mb-1 sm:mb-0`} />
@@ -151,15 +134,12 @@ const Footer = () => {
 
           {/* === Book Consultation === */}
           <div className="text-center md:text-left">
-            {/* MODIFIED: Text color and border color */}
             <h3 className={`text-[18px] font-semibold mb-4 border-b-2 border-gray-800 inline-block pb-1 tracking-wide ${PRIMARY_TEXT_COLOR}`}>
               Ready to Start?
             </h3>
-            {/* MODIFIED: CTA Rephrased text and text color */}
             <p className={`text-[15px] ${SECONDARY_TEXT_COLOR} mb-4 font-light leading-relaxed`}>
               {newCTAPhrase}
             </p>
-            {/* MODIFIED: Button color (using a placeholder brown/gold color for contrast) */}
             <Link
               href="/book-consultation"
               className="inline-block bg-[#7D5F42] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#6a4f35] transition-all duration-500 shadow-md text-[16px]"
@@ -171,10 +151,10 @@ const Footer = () => {
       </div>
 
       {/* === Footer Bottom === */}
-      {/* MODIFIED: Text color and link hover color (set to blue) */}
       <div className={`mt-12 pt-6 text-center text-[14px] font-light tracking-wide ${SECONDARY_TEXT_COLOR} border-t border-gray-200`}>
+        {/* ✅ Removed asterisks */}
         <p>
-          &copy; {new Date().getFullYear()} **Beacon of Hope Psychiatry**. All Rights Reserved.
+          &copy; {new Date().getFullYear()} Beacon of Hope Psychiatry. All Rights Reserved.
         </p>
         <div className="mt-3 flex justify-center flex-wrap gap-4">
           <Link

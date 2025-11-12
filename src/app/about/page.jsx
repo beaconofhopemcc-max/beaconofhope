@@ -214,7 +214,7 @@ export default function AboutPage() {
               <p className="text-lg leading-relaxed text-gray-700">
                 With telepsychiatry access, in-person sessions, and a patient-first
                 philosophy, Beacon of Hope stands as a trusted partner in your
-                journey toward healing.
+                journey towardS healing.
               </p>
             </div>
 

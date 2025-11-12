@@ -1,4 +1,3 @@
-
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -36,20 +35,20 @@ export default function About() {
         {/* Rose-Gold Accent Line */}
         <div className="mt-3 mb-6 w-24 h-[4px] bg-gradient-to-r from-[#7D5F42] to-[#d1b08a] rounded-full shadow-[0_0_10px_#7D5F42]/40"></div>
 
-        <p className="text-gray-700 text-lg leading-relaxed max-w-xl">
+        <p className="text-gray-700 text-lg leading-relaxed max-w-xl text-justify">
           Beacon of Hope Psychiatry is a modern center for mental-wellness,
           designed to bring calm, clarity, and compassionate care to every individual.
           We blend clinical excellence with human connection, creating the space
           where healing feels natural and hope feels real.
         </p>
 
-        <p className="mt-4 text-gray-700 text-lg leading-relaxed max-w-xl">
+        <p className="mt-4 text-gray-700 text-lg leading-relaxed max-w-xl text-justify">
           From children to adults, our focus is to help you regain balance,
           strengthen emotional resilience, and rediscover your confidence—
           in a professional, welcoming environment built on trust.
         </p>
 
-        <p className="mt-4 text-gray-700 text-lg leading-relaxed max-w-xl">
+        <p className="mt-4 text-gray-700 text-lg leading-relaxed max-w-xl text-justify">
           At Beacon of Hope, every story matters, and every life deserves light.
         </p>
 
