@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { motion, useScroll } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
@@ -15,7 +15,6 @@ export default function AboutPage() {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ container: ref });
 
-  // === Lazy-load video logic ===
   const [videoVisible, setVideoVisible] = useState(false);
   const heroRef = useRef(null);
 
@@ -40,19 +39,15 @@ export default function AboutPage() {
     <>
       <Header />
 
-      {/* The 'pt-20' class has been removed from the main tag. */}
       <main ref={ref} className="bg-white text-gray-800 overflow-hidden relative">
 
-        {/* === SCROLL PROGRESS BAR === */}
         <motion.div
           className="fixed top-0 left-0 h-[4px] bg-gradient-to-r from-[#7D5F42] to-[#d1b08a] z-50 shadow-[0_0_10px_#7D5F42]/40 origin-left"
           style={{ scaleX: scrollYProgress }}
         />
 
-        {/* === HERO VIDEO === */}
         <section
           ref={heroRef}
-          // MODIFIED: Replaced fixed height with responsive padding/height for consistent mobile scaling
           className="relative w-full h-[70vh] md:h-[80vh] flex items-center justify-center overflow-hidden"
         >
           {videoVisible ? (
@@ -66,21 +61,19 @@ export default function AboutPage() {
               className="absolute inset-0 w-full h-full object-cover"
             ></video>
           ) : (
-            // Minimal transparent placeholder while waiting for video
             <div className="absolute inset-0 bg-transparent" />
           )}
 
-          {/* === Content === */}
           <div className="relative z-10 text-center px-6 md:px-12 max-w-3xl py-24">
             <motion.h1
               variants={fadeUp}
               initial="hidden"
               animate="visible"
-              // MODIFIED: Reduced mobile text size from text-4xl to text-3xl
               className="text-3xl md:text-6xl font-extrabold text-white drop-shadow-lg"
             >
               About Beacon of Hope Psychiatry
             </motion.h1>
+
             <motion.p
               variants={fadeUp}
               initial="hidden"
@@ -103,10 +96,9 @@ export default function AboutPage() {
             viewport={{ once: true }}
             className="max-w-5xl mx-auto text-center"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-[#004AAD]">
-              Who We Are
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#004AAD]">Who We Are</h2>
             <div className="mx-auto mt-3 w-24 h-[4px] bg-gradient-to-r from-[#7D5F42] to-[#d1b08a] rounded-full shadow-[0_0_10px_#7D5F42]/40"></div>
+
             <p className="mt-6 text-lg leading-relaxed text-gray-700">
               Beacon of Hope Psychiatry is a center built on trust, innovation,
               and empathy. Our clinicians create a space where each story is
@@ -114,7 +106,6 @@ export default function AboutPage() {
             </p>
           </motion.div>
 
-          {/* Full-size responsive image with original aspect on mobile */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -174,10 +165,10 @@ export default function AboutPage() {
                 viewport={{ once: true }}
                 className="bg-white rounded-2xl p-8 shadow-md border border-[#7D5F42]/30 hover:shadow-[0_0_25px_#7D5F42]/40 transition-all duration-500"
               >
-                <h3 className="text-2xl font-semibold text-[#004AAD] mb-3">
-                  {item.title}
-                </h3>
-                <p className="text-gray-700 leading-relaxed">{item.text}</p>
+                <h3 className="text-2xl font-semibold text-[#004AAD] mb-3">{item.title}</h3>
+
+                {/* ONLY THESE THREE ARE JUSTIFIED */}
+                <p className="text-gray-700 leading-relaxed text-justify">{item.text}</p>
               </motion.div>
             ))}
           </div>
@@ -206,19 +197,21 @@ export default function AboutPage() {
             className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto items-center"
           >
             <div className="space-y-6">
-              <p className="text-lg leading-relaxed text-gray-700">
+
+              {/* ONLY THESE TWO PARAGRAPHS JUSTIFIED */}
+              <p className="text-lg leading-relaxed text-gray-700 text-justify">
                 We combine medical expertise with genuine human understanding.
                 Our integrated approach ensures that care is not just clinical —
                 it’s deeply personal, addressing the mind, body, and spirit.
               </p>
-              <p className="text-lg leading-relaxed text-gray-700">
+
+              <p className="text-lg leading-relaxed text-gray-700 text-justify">
                 With telepsychiatry access, in-person sessions, and a patient-first
                 philosophy, Beacon of Hope stands as a trusted partner in your
-                journey towardS healing.
+                journey toward healing.
               </p>
             </div>
 
-            {/* Keep original size on mobile */}
             <div className="relative w-full overflow-hidden rounded-3xl shadow-lg">
               <Image
                 src="/about2.png"
@@ -240,15 +233,14 @@ export default function AboutPage() {
             viewport={{ once: true }}
             className="px-6 md:px-12 max-w-3xl"
           >
-            <h2 
-              // MODIFIED: Adjusted for consistent mobile/desktop scaling
-              className="text-3xl sm:text-4xl font-bold mb-4"
-            >
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
               Ready to Begin Your Healing Journey?
             </h2>
+
             <p className="text-lg text-gray-100 mb-8">
               Take the next step with our compassionate experts. Your path to clarity and balance starts here.
             </p>
+
             <Link
               href="/book-consultation"
               className="bg-[#7D5F42] hover:bg-[#6a4f35] text-white font-semibold px-10 py-3 rounded-full shadow-md transition-all duration-300 hover:scale-[1.05]"
