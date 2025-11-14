@@ -90,8 +90,8 @@ const Footer = () => {
                 ["Reviews", "/reviews"],
                 ["Insurances", "/insurance"],
                 ["Patient Intake", "/patient-intake"],
-                ["Resources", "/resources"],       // ✅ New item added
-                ["Policies", "/policies"],         // ✅ New item added
+                ["Resources", "/resources"],
+                ["Policies", "/policies"],
               ].map(([label, href]) => (
                 <li key={href}>
                   <Link
@@ -111,20 +111,21 @@ const Footer = () => {
               Contact Us
             </h3>
             <ul className={`space-y-3 ${SECONDARY_TEXT_COLOR} text-[15px] font-light`}>
+              
+              {/* Updated Address */}
               <li className="flex flex-col sm:flex-row items-center sm:items-start sm:space-x-3">
                 <FaMapMarkerAlt className={`text-[${BRAND_BLUE}] mb-1 sm:mb-0`} />
                 <span className="max-w-[220px]">
-                  123 Health Blvd, Suite 456, Anytown, USA 12345
+                  724 Bielenberg Woodbury MN 55125
                 </span>
               </li>
+
+              {/* Updated Single Phone Number */}
               <li className="flex items-center justify-center sm:justify-start space-x-2">
                 <FaPhoneAlt className={`text-[${BRAND_BLUE}]`} />
-                <span>(281) 406-6473</span>
+                <span>651-246-8253</span>
               </li>
-              <li className="flex items-center justify-center sm:justify-start space-x-2">
-                <FaPhoneAlt className={`text-[${BRAND_BLUE}]`} />
-                <span>(281) 406-6474</span>
-              </li>
+
               <li className="flex items-center justify-center sm:justify-start space-x-2">
                 <FaEnvelope className={`text-[${BRAND_BLUE}]`} />
                 <span>contact@beaconofhope.com</span>
@@ -152,7 +153,6 @@ const Footer = () => {
 
       {/* === Footer Bottom === */}
       <div className={`mt-12 pt-6 text-center text-[14px] font-light tracking-wide ${SECONDARY_TEXT_COLOR} border-t border-gray-200`}>
-        {/* ✅ Removed asterisks */}
         <p>
           &copy; {new Date().getFullYear()} Beacon of Hope Psychiatry. All Rights Reserved.
         </p>
