@@ -86,7 +86,7 @@ export default function TeamPage() {
             className="relative w-full sm:w-3/4 md:w-2/3 lg:w-1/2 aspect-[4/5] lg:h-[500px] rounded-3xl overflow-hidden shadow-xl mx-auto lg:mx-0"
           >
             <Image
-              src="/profile.png"
+              src="/profiles.png"
               alt="Dr. Samuel Okechukwu Nwanekpe"
               width={1000}
               height={1250}

@@ -66,7 +66,7 @@ export default function Header() {
                   About Us
                 </a>
                 <a
-                  href="/team"
+                  href="/teams"
                   className="block px-4 py-2 text-sm hover:bg-[#004AAD] hover:text-white transition-colors"
                 >
                   Our Team
@@ -193,7 +193,7 @@ export default function Header() {
                   About Us
                 </a>
                 <a
-                  href="/team"
+                  href="/teams"
                   onClick={navigate}
                   className="block w-full py-2 hover:text-[#004AAD] transition-colors px-2"
                 >
