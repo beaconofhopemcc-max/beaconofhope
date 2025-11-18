@@ -87,7 +87,7 @@ export default function TeamPage() {
           >
             <Image
               src="/profiles.png"
-              alt="Dr. Samuel Okechukwu Nwanekpe"
+              alt="Dr. Samuel Okechukwu Nwanekpe."
               width={1000}
               height={1250}
               className="object-cover object-top w-full h-full"
