@@ -10,20 +10,44 @@ export default function Hero() {
     if (video) {
       const playVideo = async () => {
         try {
-          await video.play();
-          setVideoReady(true);
+          // Check if video is loaded and ready before playing
+          if (video.readyState >= 3) {
+            await video.play();
+            setVideoReady(true);
+          } else {
+            // Wait for 'canplay' event if it's not ready yet
+            video.addEventListener('canplay', handleCanPlay);
+          }
         } catch (err) {
           console.warn("Autoplay blocked:", err);
         }
       };
+      
+      const handleCanPlay = async () => {
+          try {
+              await video.play();
+              setVideoReady(true);
+          } catch (err) {
+              console.warn("Autoplay blocked after load:", err);
+          }
+          video.removeEventListener('canplay', handleCanPlay);
+      };
+      
       playVideo();
+
+      // Cleanup function to remove event listener
+      return () => {
+        if (video) {
+            video.removeEventListener('canplay', handleCanPlay);
+        }
+      };
     }
   }, []);
 
   return (
     <section className="w-full bg-black text-white overflow-hidden">
-
-      {/* === DESKTOP HERO === */}
+      
+      {/* === DESKTOP HERO (Video as background) === */}
       <div className="hidden md:flex relative items-center justify-center h-[90vh]">
         <video
           ref={videoRef}
@@ -58,32 +82,31 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* === MOBILE HERO (text over video, shifted right) === */}
-      <div className="relative md:hidden w-full h-[100vh] overflow-hidden">
-        <video
-          ref={videoRef}
-          src="/hero.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          // 👇 Focuses the video more toward the right to show people clearly
-          className="absolute inset-0 w-full h-full object-cover object-[70%_center]"
-          poster="/hero-fallback.jpg"
-        ></video>
+      {/* === MOBILE & TABLET HERO (Video & Text/Button Stacked) === */}
+      <div className="md:hidden w-full">
+        {/* Video Section */}
+        <div className="relative w-full h-[200px] flex items-center justify-center overflow-hidden bg-white"> 
+          <video
+            src="/hero.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-contain" 
+            poster="/hero-fallback.jpg"
+          ></video>
+        </div>
 
-        {/* Gradient overlay for better contrast */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
-
-        {/* Text & Button Overlay */}
-        <div className="absolute inset-0 z-10 flex flex-col justify-center items-center text-center px-6">
-          <h1 className="text-3xl font-bold text-white leading-tight mb-4">
+        {/* Text & Button Section (Standalone - White Background) */}
+        {/* Key Change: Changed p-8 to px-8 pb-8 pt-4 to reduce the top gap */}
+        <div className="px-8 pb-8 pt-4 text-center bg-white text-black">
+          <h1 className="text-3xl font-bold text-[#004AAD] leading-tight mb-4">
             Beacon of Hope Psychiatry
           </h1>
 
           <div className="mx-auto w-24 h-[3px] rounded-full bg-gradient-to-r from-[#7D5F42] to-[#A0815F] shadow-sm mb-6"></div>
 
-          <p className="text-base text-gray-200 mb-8 max-w-sm">
+          <p className="text-base text-gray-700 mb-8 max-w-sm mx-auto">
             Compassionate mental health care that restores clarity, balance, and peace.
           </p>
 
