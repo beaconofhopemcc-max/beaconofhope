@@ -94,7 +94,7 @@ export default function AnxietyPage() {
                 Understanding Anxiety
               </motion.h2>
               <p className="mt-6 text-lg text-gray-700 leading-relaxed">
-                Anxiety isn’t just worry — it’s a deep state of alertness that can make you feel
+                Anxiety isn’t just worry — it is a deep state of alertness that can make you feel
                 tense, restless, or unable to relax. It often appears when your body and mind
                 feel unsafe, even in calm environments. At Beacon of Hope Psychiatry, we help
                 you retrain your mind and body to feel secure again.
