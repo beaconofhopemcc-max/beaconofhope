@@ -15,6 +15,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Mental Health Recovery",
   description: "A Beacon of Hope for Everyone",
+  icons: {
+    icon: "/logo.png",     // Primary favicon
+    shortcut: "/logo.png", // Shortcut icon for browsers
+    apple: "/logo.png",    // Icon for iOS home screen
+  },
 };
 
 export default function RootLayout({
