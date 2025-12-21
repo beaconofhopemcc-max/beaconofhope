@@ -1,302 +1,220 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import Header from "../Header";
 import Footer from "../Footer";
-import { useEffect, useRef, useState } from "react";
+import { CalendarCheck, HeartHandshake, Brain, CheckCircle2 } from "lucide-react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
 };
 
+const ACCENT_COLOR = "#B98C5B";
+
 export default function DepressionPage() {
-  const [videoVisible, setVideoVisible] = useState(false);
-  const heroRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setVideoVisible(true);
-            observer.disconnect();
-          }
-        });
-      },
-      { rootMargin: "200px" }
-    );
-    if (heroRef.current) observer.observe(heroRef.current);
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <>
       <Header />
 
-      {/* MODIFIED: Removed 'pt-20' class to eliminate space at the top */}
       <main className="bg-white text-gray-800 overflow-hidden">
-        {/* === HERO SECTION === */}
-        <section
-          ref={heroRef}
-          // MODIFIED: Adjusted height for mobile (py-24) and kept fixed height for md and above
-          className="relative w-full py-24 md:h-[80vh] flex items-center justify-center overflow-hidden" 
-        >
-          {videoVisible ? (
-            <video
-              src="/depression.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="none"
-              className="absolute inset-0 w-full h-full object-cover"
-            ></video>
-          ) : (
-            <div className="absolute inset-0 bg-transparent" />
-          )}
+        
+        {/* === STANDALONE HERO SECTION === */}
+        <section className="relative w-full h-[70vh] md:h-[85vh] flex items-center justify-center overflow-hidden">
+          <Image
+            src="/depression.png"
+            alt="Depression Support"
+            fill
+            priority
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+          {/* Subtle gradient overlay to ensure text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/60" />
 
-          <div className="relative z-10 text-center px-6 md:px-12 max-w-3xl">
+          <div className="relative z-10 text-center px-6 md:px-12 max-w-5xl">
             <motion.h1
               variants={fadeUp}
               initial="hidden"
               animate="visible"
-              // MODIFIED: Reduced mobile text size from text-4xl to text-3xl
-              className="text-3xl md:text-6xl font-extrabold text-white drop-shadow-lg leading-tight"
+              className="text-4xl md:text-8xl font-extrabold text-white drop-shadow-2xl tracking-tight"
             >
-              Depression 
+              Depression Care
             </motion.h1>
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              transition={{ delay: 0.2 }}
+              className="mt-6 flex justify-center"
+            >
+              <div className="h-1.5 w-24 rounded-full" style={{ backgroundColor: ACCENT_COLOR }}></div>
+            </motion.div>
             <motion.p
               variants={fadeUp}
               initial="hidden"
               animate="visible"
-              transition={{ delay: 0.3 }}
-              className="mt-6 text-lg md:text-xl text-white leading-relaxed drop-shadow-md"
+              transition={{ delay: 0.4 }}
+              className="mt-8 text-lg md:text-2xl text-white leading-relaxed drop-shadow-lg font-light max-w-3xl mx-auto"
             >
-              Compassionate treatment that restores peace, energy, and joy to daily life.
+              Compassionate treatment designed to restore peace, energy, and joy to your daily life.
             </motion.p>
           </div>
         </section>
 
-        {/* === INTRODUCTION & IMAGE (NEW TWO-COLUMN LAYOUT) === */}
-        {/* Replaces the old INTRODUCTION and IMAGE SECTION with a new two-column layout */}
-        <section className="max-w-7xl mx-auto py-20 px-6 md:px-12 lg:px-20">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            
-            {/* TEXT COLUMN (Left on Desktop, Top on Mobile) */}
-            <div className="md:order-1 order-2 text-center md:text-left">
-              <motion.h2
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="text-3xl font-bold text-[#004AAD]"
-              >
-                Understanding Depression
-              </motion.h2>
-              <p className="mt-6 text-lg text-gray-700 leading-relaxed">
-                Depression is more than sadness — it’s a persistent feeling of emptiness or
-                disconnection that can affect your thoughts, sleep, focus, and energy.
-                At Beacon of Hope Psychiatry, we view depression not as a weakness,
-                but as a condition that deserves evidence-based, compassionate care.
-              </p>
-            </div>
-
-            {/* IMAGE COLUMN (Right on Desktop, Bottom on Mobile) */}
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              // MODIFIED: Adopted aspect ratio from Substance Abuse page for a clean content image
-              className="relative w-full aspect-[16/10] overflow-hidden rounded-xl shadow-xl md:order-2 order-1" 
-            >
-              <Image
-                // Used the requested 'approach.png' here for the main content image
-                src="/approach.png" 
-                alt="Depression support at Beacon of Hope Psychiatry"
-                fill
-                className="object-cover object-center"
-                priority
-              />
-              <div className="absolute inset-0 bg-black/10"></div>
-            </motion.div>
-          </div>
-        </section>
-
-
-        {/* === SYMPTOMS SECTION === */}
-        <section className="bg-[#f9fafb] py-20 px-6 md:px-12 lg:px-20">
-          <div className="max-w-5xl mx-auto">
-            <motion.h3
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="text-2xl font-semibold text-[#004AAD] text-center md:text-left"
-            >
-              Common Symptoms of Depression
-            </motion.h3>
-
-            <ul className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6 text-gray-700 text-lg">
-              {[
-                "Persistent sadness or emptiness",
-                "Loss of interest in enjoyable activities",
-                "Fatigue or lack of motivation",
-                "Sleep disturbances (too much or too little)",
-                "Difficulty concentrating",
-                "Changes in appetite or weight",
-                "Feelings of guilt, worthlessness, or hopelessness",
-                "Thoughts of self-harm or withdrawal from others",
-              ].map((symptom, i) => (
-                <li
-                  key={i}
-                  className="flex items-start space-x-3 group transition-transform duration-300 hover:translate-x-1"
-                >
-                  <svg
-                    className="w-5 h-5 flex-shrink-0 mt-1 text-[#004AAD] group-hover:scale-125 transition-transform duration-300"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <circle cx="10" cy="10" r="6" />
-                  </svg>
-                  <span>{symptom}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
-        {/* === OUR APPROACH (NEW TWO-COLUMN LAYOUT) === */}
-        {/* Restructured the TREATMENT APPROACH to match the 2-column layout */}
-        <section className="max-w-7xl mx-auto py-20 px-6 md:px-12 lg:px-20 relative">
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            
-            {/* TEXT & SERVICE LIST COLUMN (Left on Desktop, Top on Mobile) */}
-            <div className="md:order-1 order-2">
-              <motion.h3
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="text-2xl font-semibold text-[#004AAD] text-center md:text-left"
-              >
-                Our Approach to Treating Depression
-              </motion.h3>
-              <p className="mt-6 text-lg text-gray-700 leading-relaxed text-center md:text-left">
-                At Beacon of Hope Psychiatry, our care model blends advanced medical treatment with
-                holistic emotional support. Each treatment plan is customized to your story,
-                lifestyle, and goals.
-              </p>
-
-              {/* === Connector Line (Adjusted for 2-column layout) === */}
-              <div className="hidden lg:block absolute left-[30%] transform translate-x-1/2 top-[60%] w-[30%] h-[4px] rounded-full bg-gradient-to-r from-[#004AAD] via-[#7D5F42] to-[#004AAD] opacity-40"></div>
-              
-              {/* Cards Container - Adjusted from 3 columns to 2 columns for a better fit */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-16 relative z-10">
-                {[
-                  {
-                    title: "Comprehensive Evaluation",
-                    desc: "We begin with a detailed mental health assessment to understand biological, emotional, and environmental factors.",
-                  },
-                  {
-                    title: "Personalized Medication Management",
-                    desc: "When appropriate, medications are carefully prescribed and monitored to restore balance and relieve symptoms safely.",
-                  },
-                  {
-                    title: "Therapeutic Support",
-                    desc: "We integrate evidence-based therapies — including CBT, mindfulness, and supportive counseling — to strengthen resilience.",
-                  },
-                  // Added a 4th point to maintain visual balance in the 2x2 grid on desktop
-                   {
-                    title: "Mind-Body Integration",
-                    desc: "Incorporating lifestyle changes, nutrition, and stress reduction techniques for total wellness and sustained mood stability.",
-                  },
-                ].map((item, i) => (
-                  <motion.div
-                    key={i}
-                    variants={fadeUp}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    className="bg-white rounded-2xl p-8 shadow-lg border border-[#7D5F42]/20 hover:shadow-[0_0_20px_#7D5F42]/30 transition-all duration-500"
-                  >
-                    <h4 className="text-xl font-bold text-[#004AAD] mb-3">
-                      {item.title}
-                    </h4>
-                    <p className="text-gray-700 leading-relaxed">{item.desc}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            {/* NEW IMAGE COLUMN (Right on Desktop, Bottom on Mobile) */}
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              // MODIFIED: New Aspect Ratio and hidden on mobile for the 2-column approach section
-              className="relative w-full aspect-[4/5] overflow-hidden rounded-2xl shadow-xl md:order-2 order-1 hidden md:block"
-            >
-              <Image
-                // Added a new image source for the approach section, different from the main one
-                src="/approach-detail.png" 
-                alt="Our comprehensive approach to depression treatment"
-                fill
-                className="object-cover object-center"
-              />
-              <div className="absolute inset-0 bg-black/10"></div>
-            </motion.div>
-
-          </div>
-        </section>
-
-
-        {/* === WHY CHOOSE US === */}
-        <section className="bg-[#f9fafb] py-20 px-6 md:px-12 lg:px-20 text-center">
-          <motion.h3
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="text-3xl font-bold text-[#004AAD]"
-          >
-            Why Choose Beacon of Hope Psychiatry
-          </motion.h3>
-          <p className="mt-6 text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
-            Our mission is to combine science and empathy in every consultation.
-            Whether your depression is mild or severe, our goal is to help you rediscover
-            calm, connection, and confidence — one step at a time.
-          </p>
-        </section>
-        
-        {/* REMOVED: The entire BRAND VIDEO SECTION was here. */}
-
-        {/* === CTA === */}
-        <section className="relative w-full py-24 flex items-center justify-center overflow-hidden bg-[#004AAD] text-white text-center px-6">
+        {/* === INTRODUCTION SECTION === */}
+        <section className="max-w-7xl mx-auto py-24 px-6 md:px-12 lg:px-20 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="max-w-3xl"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4 leading-snug">
-              You Don’t Have to Face Depression Alone
+            <h2 className="text-3xl md:text-5xl font-bold text-[#004AAD] leading-tight">
+              Understanding <br />
+              <span style={{ color: ACCENT_COLOR }}>Depression</span>
             </h2>
-            <p className="text-base sm:text-lg text-gray-100 mb-8 leading-relaxed">
-              Let’s work together to bring peace, purpose, and stability back to your life.
-              Reach out today and begin your journey toward recovery.
+            <p className="mt-8 text-lg text-gray-700 leading-relaxed text-justify">
+              Depression is more than sadness — it’s a persistent feeling of emptiness or
+              disconnection that can affect your thoughts, sleep, focus, and energy.
+              At Beacon of Hope Psychiatry, we view depression not as a weakness,
+              but as a condition that deserves evidence-based, compassionate care.
             </p>
-            <a
-              href="/book-consultation"
-              className="bg-[#7D5F42] hover:bg-[#6a4f35] text-white font-semibold px-8 sm:px-10 py-3 rounded-full shadow-md transition-all duration-300 hover:scale-[1.05]"
-            >
-              Book a Consultation
-            </a>
           </motion.div>
+
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="relative w-full aspect-[4/3] rounded-[3rem] overflow-hidden shadow-2xl border-8 border-slate-50"
+          >
+            <Image
+              src="/approach.png"
+              alt="Our approach to depression"
+              fill
+              className="object-cover"
+            />
+          </motion.div>
+        </section>
+
+        {/* === SYMPTOMS GRID === */}
+        <section className="bg-slate-50 py-24 px-6 md:px-12 lg:px-20">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h3 className="text-3xl md:text-4xl font-bold text-[#004AAD]">Common Symptoms</h3>
+              <p className="mt-4 text-gray-600">Recognizing these signs is the first step toward reclaiming your well-being.</p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                "Persistent sadness or emptiness",
+                "Loss of interest in activities",
+                "Fatigue or lack of motivation",
+                "Sleep disturbances",
+                "Difficulty concentrating",
+                "Changes in appetite",
+                "Feelings of worthlessness",
+                "Social withdrawal",
+                "Physical aches without cause",
+              ].map((symptom, i) => (
+                <div
+                  key={i}
+                  className="flex items-center space-x-3 p-5 bg-white rounded-2xl shadow-sm border-b-4 transition-transform hover:-translate-y-1"
+                  style={{ borderBottomColor: ACCENT_COLOR }}
+                >
+                  <CheckCircle2 className="w-5 h-5 flex-shrink-0" style={{ color: ACCENT_COLOR }} />
+                  <span className="font-medium text-gray-700">{symptom}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* === CARE MODEL SECTION === */}
+        <section className="max-w-7xl mx-auto py-24 px-6 md:px-12 lg:px-20 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="relative w-full aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl hidden lg:block"
+          >
+            <Image
+              src="/approach-detail.png"
+              alt="Treatment Approach Detail"
+              fill
+              className="object-cover"
+            />
+          </motion.div>
+
+          <div className="space-y-10">
+            <div>
+              <h3 className="text-3xl md:text-5xl font-bold text-[#004AAD]">Our Care Model</h3>
+              <p className="mt-6 text-lg text-gray-600 leading-relaxed">
+                Our care blends advanced medical treatment with holistic emotional support, customized to your unique story and lifestyle goals.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {[
+                { title: "Evaluation", desc: "Detailed biological and emotional assessment." },
+                { title: "Medication", desc: "Safe management to restore chemical balance." },
+                { title: "Therapy", desc: "Counseling to strengthen mental resilience." },
+                { title: "Mind-Body", desc: "Lifestyle and nutrition for total wellness." },
+              ].map((item, i) => (
+                <div key={i} className="p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-xl transition-all">
+                  <h4 className="font-bold text-[#004AAD] text-xl mb-2">{item.title}</h4>
+                  <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* === HOW IT WORKS === */}
+        <section className="py-24 px-6 md:px-12 lg:px-20 bg-[#004AAD] text-white">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold">Your Path to Recovery</h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {[
+              { icon: <CalendarCheck size={40} />, title: "Book Consultation", desc: "Schedule your first appointment easily online." },
+              { icon: <HeartHandshake size={40} />, title: "Personal Assessment", desc: "Connect with our experts to discuss your journey." },
+              { icon: <Brain size={40} />, title: "Personalized Care", desc: "Begin your custom path to mental stability." },
+            ].map((step, i) => (
+              <div key={i} className="bg-white p-10 rounded-[2.5rem] text-[#004AAD] shadow-xl text-center flex flex-col items-center">
+                <div className="mb-6 p-4 rounded-2xl bg-slate-50" style={{ color: ACCENT_COLOR }}>{step.icon}</div>
+                <h3 className="text-2xl font-bold mb-3">{step.title}</h3>
+                <p className="text-gray-600">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* === FINAL CTA === */}
+        <section className="relative w-full h-[70vh] flex items-center justify-center text-center overflow-hidden">
+          <Image
+            src="/home6.png"
+            alt="Healing Journey"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-black/50"></div>
+          
+          <div className="relative z-10 px-6 max-w-4xl text-white">
+            <h2 className="text-4xl md:text-7xl font-bold mb-8">You Are Not Alone</h2>
+            <p className="text-xl md:text-2xl mb-10 opacity-90 font-light">Let’s work together to bring peace, purpose, and stability back to your life.</p>
+            <Link href="/book-consultation"
+              className="inline-block text-white font-bold px-16 py-5 rounded-full text-lg shadow-2xl transition-all hover:scale-105"
+              style={{ backgroundColor: ACCENT_COLOR }}
+            >
+              Start Your Healing Journey
+            </Link>
+          </div>
+          <div className="absolute bottom-0 w-full h-32 bg-gradient-to-t from-white to-transparent"></div>
         </section>
       </main>
 
