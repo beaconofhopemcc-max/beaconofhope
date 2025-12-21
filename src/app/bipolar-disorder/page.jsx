@@ -1,297 +1,234 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import Header from "../Header";
 import Footer from "../Footer";
-import { useEffect, useRef, useState } from "react";
+import { CalendarCheck, HeartHandshake, Brain, CheckCircle2 } from "lucide-react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
 };
 
+const ACCENT_COLOR = "#B98C5B";
+
 export default function BipolarDisorderPage() {
-  const [videoVisible, setVideoVisible] = useState(false);
-  const heroRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setVideoVisible(true);
-            observer.disconnect();
-          }
-        });
-      },
-      { rootMargin: "200px" }
-    );
-    if (heroRef.current) observer.observe(heroRef.current);
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <>
       <Header />
 
       <main className="bg-white text-gray-800 overflow-hidden">
-        {/* === HERO SECTION === */}
-        <section
-          ref={heroRef}
-          // MODIFIED: Reduced mobile vertical padding to py-16 and used items-start to top-align content
-          className="relative w-full py-16 md:h-[80vh] flex items-start md:items-center justify-center overflow-hidden" 
-        >
-          {videoVisible ? (
-            <video
-              src="/bipolar.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="none"
-              className="absolute inset-0 w-full h-full object-cover"
-            ></video>
-          ) : (
-            <div className="absolute inset-0 bg-transparent" />
-          )}
+        
+        {/* === STANDALONE HERO SECTION === */}
+        <section className="relative w-full h-[75vh] md:h-[85vh] flex items-center overflow-hidden">
+          <Image
+            src="/bipolar.png"
+            alt="Bipolar Disorder Support Hero"
+            fill
+            priority
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+          {/* Side-weighted gradient overlay for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
 
-          {/* MODIFIED: Added pt-8 for small screen padding, and kept max-w-4xl for centering */}
-          <div className="relative z-10 text-center px-6 md:px-12 max-w-4xl pt-8">
+          <div className="relative z-10 px-6 md:px-12 lg:px-24 max-w-4xl">
             <motion.h1
               variants={fadeUp}
               initial="hidden"
               animate="visible"
-              className="text-4xl md:text-6xl font-extrabold text-white drop-shadow-lg leading-tight"
+              className="text-4xl md:text-8xl font-extrabold text-white drop-shadow-2xl tracking-tight leading-tight"
             >
-              Bipolar Disorder 
+              Bipolar <br /> Support
             </motion.h1>
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              transition={{ delay: 0.2 }}
+              className="mt-6"
+            >
+              <div className="h-2 w-24 rounded-full" style={{ backgroundColor: ACCENT_COLOR }}></div>
+            </motion.div>
             <motion.p
               variants={fadeUp}
               initial="hidden"
               animate="visible"
-              transition={{ delay: 0.3 }}
-              className="mt-6 text-lg md:text-xl text-white leading-relaxed drop-shadow-md"
+              transition={{ delay: 0.4 }}
+              className="mt-8 text-lg md:text-2xl text-white leading-relaxed drop-shadow-lg font-light max-w-2xl"
             >
-              Stabilizing mood, restoring balance, and empowering individuals to live with
-              clarity and confidence.
+              Stabilizing mood, restoring balance, and empowering individuals to live with clarity and confidence.
             </motion.p>
-          </div>
-        </section>
-
-        {/* === INTRODUCTION & IMAGE (SWAPPED ON DESKTOP) === */}
-        <section className="max-w-7xl mx-auto py-20 px-6 md:px-12 lg:px-20">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            
-            {/* TEXT COLUMN (Left on Desktop, Top on Mobile) */}
-            <div className="md:order-1 order-2 text-center md:text-left">
-              <motion.h2
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="text-3xl font-bold text-[#004AAD]"
-              >
-                Understanding Bipolar Disorder
-              </motion.h2>
-              <p className="mt-6 text-lg text-gray-700 leading-relaxed">
-                Bipolar disorder is characterized by shifts in mood, energy, and activity
-                levels that can affect daily functioning. It involves episodes of elevated
-                mood (mania or hypomania) and periods of depression. At Beacon of Hope
-                Psychiatry, we treat bipolar disorder with compassion, precision, and a focus
-                on long-term stability and wellbeing.
-              </p>
-            </div>
-
-            {/* IMAGE COLUMN (Right on Desktop, Bottom on Mobile) */}
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="relative w-full aspect-[16/10] overflow-hidden rounded-xl shadow-xl md:order-2 order-1" 
+            <motion.div 
+               variants={fadeUp}
+               initial="hidden"
+               animate="visible"
+               transition={{ delay: 0.6 }}
+               className="mt-10"
             >
-              <Image
-                src="/bipolar1.png"
-                alt="Bipolar Disorder care at Beacon of Hope Psychiatry"
-                fill
-                className="object-cover object-center"
-                priority
-              />
-              <div className="absolute inset-0 bg-black/10"></div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* === SYMPTOMS SECTION === */}
-        <section className="bg-[#f9fafb] py-20 px-6 md:px-12 lg:px-20">
-          <div className="max-w-5xl mx-auto">
-            <motion.h3
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="text-2xl font-semibold text-[#004AAD] text-center md:text-left"
-            >
-              Common Symptoms of Bipolar Disorder
-            </motion.h3>
-
-            <ul className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6 text-gray-700 text-lg">
-              {[
-                "Extreme mood swings between highs and lows",
-                "Periods of excessive energy or reduced need for sleep",
-                "Racing thoughts or rapid speech",
-                "Impulsive or risky behaviors",
-                "Difficulty maintaining focus or making decisions",
-                "Periods of sadness, fatigue, or hopelessness",
-                "Changes in appetite or sleep patterns",
-                "Difficulty maintaining relationships or routines",
-              ].map((symptom, i) => (
-                <li
-                  key={i}
-                  className="flex items-start space-x-3 group transition-transform duration-300 hover:translate-x-1"
+                <Link 
+                  href="/book-consultation"
+                  className="inline-block text-white font-bold px-10 py-4 rounded-full shadow-xl transition-all hover:scale-105"
+                  style={{ backgroundColor: ACCENT_COLOR }}
                 >
-                  <svg
-                    className="w-5 h-5 flex-shrink-0 mt-1 text-[#7D5F42] group-hover:scale-125 transition-transform duration-300"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <circle cx="10" cy="10" r="6" />
-                  </svg>
-                  <span>{symptom}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
-        {/* === OUR APPROACH (MODIFIED TO MATCH 2-COLUMN LAYOUT) === */}
-        {/* MODIFIED: Changed max-w to 7xl and added responsive grid layout */}
-        <section className="max-w-7xl mx-auto py-20 px-6 md:px-12 lg:px-20 relative">
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            
-            {/* TEXT & SERVICE LIST COLUMN (Left on Desktop, Top on Mobile) */}
-            {/* The connector line from the old Bipolar version is removed since the layout changed */}
-            <div className="md:order-1 order-2">
-              <motion.h3
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="text-2xl font-semibold text-[#004AAD] text-center md:text-left"
-              >
-                Our Approach to Treating Bipolar Disorder
-              </motion.h3>
-              <p className="mt-6 text-lg text-gray-700 leading-relaxed text-center md:text-left">
-                Our treatment focuses on achieving **mood stability**, improving insight, and
-                strengthening daily functioning. Each plan is tailored to help clients manage
-                highs and lows with resilience and calm.
-              </p>
-
-              {/* === Connector Line (Hidden on Mobile/Small Desktop) === */}
-              {/* Added the connector line from the AnxietyPage to the BipolarPage for style consistency */}
-              <div className="hidden lg:block absolute left-[30%] transform translate-x-1/2 top-[60%] w-[30%] h-[4px] rounded-full bg-gradient-to-r from-[#004AAD] via-[#7D5F42] to-[#004AAD] opacity-40"></div>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-16 relative z-10">
-                {[
-                  {
-                    title: "Comprehensive Evaluation",
-                    desc: "We conduct in-depth assessments to understand mood patterns, triggers, and lifestyle factors influencing bipolar cycles.",
-                  },
-                  {
-                    title: "Medication Management",
-                    desc: "Mood stabilizers and other medications are carefully prescribed and monitored to maintain balance and reduce relapses.",
-                  },
-                  {
-                    title: "Therapeutic Support",
-                    desc: "Through cognitive therapy and supportive counseling, clients gain emotional awareness and tools for long-term self-regulation.",
-                  },
-                   {
-                    title: "Relapse Prevention", // Added a 4th point to maintain card balance, or could remove one. Keeping 4 for a 2x2 grid.
-                    desc: "We focus on proactive strategies, early warning signs, and lifestyle adjustments to sustain long-term stability.",
-                  },
-                ].map((item, i) => (
-                  <motion.div
-                    key={i}
-                    variants={fadeUp}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    // Adjusted padding/text-size to fit 4 items better in the grid
-                    className="col-span-1 bg-white rounded-2xl p-8 shadow-lg border border-[#7D5F42]/20 hover:shadow-[0_0_20px_#7D5F42]/30 transition-all duration-500"
-                  >
-                    <h4 className="text-xl font-bold text-[#004AAD] mb-3">
-                      {item.title}
-                    </h4>
-                    <p className="text-gray-700 leading-relaxed">{item.desc}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            {/* NEW IMAGE COLUMN (Right on Desktop, Hidden on Mobile) */}
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              // Added hidden md:block to hide on mobile, and used aspect-[4/5] as in AnxietyPage
-              className="relative w-full aspect-[4/5] overflow-hidden rounded-2xl shadow-xl md:order-2 order-1 hidden md:block" 
-            >
-              <Image
-                src="/approach-bipolar.png" // Changed image source to be relevant for Bipolar
-                alt="Our comprehensive approach to mental health treatment"
-                fill
-                className="object-cover object-center"
-              />
-              <div className="absolute inset-0 bg-black/10"></div>
+                  Book a Consultation
+                </Link>
             </motion.div>
-
           </div>
         </section>
 
-        {/* === WHY CHOOSE US === */}
-        <section className="bg-[#f9fafb] py-20 px-6 md:px-12 lg:px-20 text-center">
-          <motion.h3
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="text-3xl font-bold text-[#004AAD]"
-          >
-            Why Choose Beacon of Hope Psychiatry
-          </motion.h3>
-          <p className="mt-6 text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
-            We provide expert psychiatric care grounded in compassion. With personalized
-            medication management, psychotherapy, and consistent follow-up, we help
-            individuals with bipolar disorder regain balance and confidence in their daily
-            lives.
-          </p>
-        </section>
-
-        {/* === CTA === */}
-        <section className="relative w-full py-24 flex items-center justify-center overflow-hidden bg-[#004AAD] text-white text-center px-6">
+        {/* === INTRODUCTION SECTION === */}
+        <section className="max-w-7xl mx-auto py-24 px-6 md:px-12 lg:px-20 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="max-w-3xl"
+            className="order-2 lg:order-1"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4 leading-snug">
-              Find Stability. Reclaim Your Balance.
+            <h2 className="text-3xl md:text-5xl font-bold text-[#004AAD] leading-tight">
+              Understanding <br />
+              <span style={{ color: ACCENT_COLOR }}>Bipolar Disorder</span>
             </h2>
-            <p className="text-base sm:text-lg text-gray-100 mb-8 leading-relaxed">
-              Bipolar disorder doesn’t define you — stability and peace are possible with
-              the right care and consistent support. Let’s take that step together.
+            <p className="mt-8 text-lg text-gray-700 leading-relaxed text-justify">
+              Bipolar disorder involves shifts in mood, energy, and activity levels that can affect daily functioning. 
+              It is not simply "moodiness"—it is a clinical condition involving cycles of mania and depression. 
+              At Beacon of Hope Psychiatry, we treat bipolar disorder with precision, focusing on long-term stability and holistic wellbeing.
             </p>
-            <a
-              href="/book-consultation"
-              className="bg-[#7D5F42] hover:bg-[#6a4f35] text-white font-semibold px-8 sm:px-10 py-3 rounded-full shadow-md transition-all duration-300 hover:scale-[1.05]"
-            >
-              Book a Consultation
-            </a>
           </motion.div>
+
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="relative w-full aspect-[4/3] rounded-[3rem] overflow-hidden shadow-2xl border-8 border-slate-50 order-1 lg:order-2"
+          >
+            <Image
+              src="/bipolar1.png"
+              alt="Professional care for Bipolar Disorder"
+              fill
+              className="object-cover"
+            />
+          </motion.div>
+        </section>
+
+        {/* === SYMPTOMS GRID === */}
+        <section className="bg-slate-50 py-24 px-6 md:px-12 lg:px-20">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h3 className="text-3xl md:text-4xl font-bold text-[#004AAD]">Signs and Symptoms</h3>
+              <p className="mt-4 text-gray-600">Managing the highs and lows begins with understanding the patterns.</p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                "Extreme mood swings",
+                "Reduced need for sleep",
+                "Racing thoughts",
+                "Rapid or pressured speech",
+                "Impulsive decision making",
+                "Periods of fatigue or sadness",
+                "Difficulty maintaining routines",
+                "Heightened irritability",
+                "Feelings of hopelessness",
+              ].map((symptom, i) => (
+                <div
+                  key={i}
+                  className="flex items-center space-x-3 p-5 bg-white rounded-2xl shadow-sm border-b-4 transition-transform hover:-translate-y-1"
+                  style={{ borderBottomColor: ACCENT_COLOR }}
+                >
+                  <CheckCircle2 className="w-5 h-5 flex-shrink-0" style={{ color: ACCENT_COLOR }} />
+                  <span className="font-medium text-gray-700">{symptom}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* === APPROACH SECTION === */}
+        <section className="max-w-7xl mx-auto py-24 px-6 md:px-12 lg:px-20 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="relative w-full aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl hidden lg:block"
+          >
+            <Image
+              src="/approach-bipolar.png"
+              alt="Our care strategy for mood stability"
+              fill
+              className="object-cover"
+            />
+          </motion.div>
+
+          <div className="space-y-10">
+            <div>
+              <h3 className="text-3xl md:text-5xl font-bold text-[#004AAD]">Our Approach</h3>
+              <p className="mt-6 text-lg text-gray-600 leading-relaxed">
+                Our treatment focuses on achieving **mood stability**, improving insight, and strengthening daily functioning through combined modalities.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {[
+                { title: "Evaluation", desc: "In-depth assessment of mood patterns and cycles." },
+                { title: "Stabilization", desc: "Expertly monitored medication management." },
+                { title: "Therapy", desc: "CBT and counseling for emotional awareness." },
+                { title: "Prevention", desc: "Strategies to recognize and manage early triggers." },
+              ].map((item, i) => (
+                <div key={i} className="p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-xl transition-all">
+                  <h4 className="font-bold text-[#004AAD] text-xl mb-2">{item.title}</h4>
+                  <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* === PATH TO STABILITY === */}
+        <section className="py-24 px-6 md:px-12 lg:px-20 bg-[#004AAD] text-white text-center">
+          <h2 className="text-4xl font-bold mb-16">Reclaim Your Balance</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {[
+              { icon: <CalendarCheck size={40} />, title: "Initial Consult", desc: "A thorough review of your history and current needs." },
+              { icon: <HeartHandshake size={40} />, title: "Personalized Care", desc: "A tailored balance of medication and support." },
+              { icon: <Brain size={40} />, title: "Consistent Growth", desc: "Ongoing monitoring to ensure long-term wellness." },
+            ].map((step, i) => (
+              <div key={i} className="bg-white p-10 rounded-[2.5rem] text-[#004AAD] shadow-xl flex flex-col items-center">
+                <div className="mb-6 p-4 rounded-2xl bg-slate-50" style={{ color: ACCENT_COLOR }}>{step.icon}</div>
+                <h3 className="text-2xl font-bold mb-3">{step.title}</h3>
+                <p className="text-gray-600">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* === FINAL CTA === */}
+        <section className="relative w-full h-[70vh] flex items-center justify-center text-center overflow-hidden">
+          <Image
+            src="/home6.png"
+            alt="Healing Journey Background"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-black/60"></div>
+          
+          <div className="relative z-10 px-6 max-w-4xl text-white">
+            <h2 className="text-4xl md:text-7xl font-bold mb-8">Find Your Steady Path</h2>
+            <p className="text-xl md:text-2xl mb-12 opacity-90 font-light max-w-2xl mx-auto">
+              Bipolar disorder doesn’t define you. With the right care, you can find the stability needed to live a full and confident life.
+            </p>
+            <Link href="/book-consultation"
+              className="inline-block text-white font-bold px-16 py-5 rounded-full text-xl shadow-2xl transition-all hover:scale-105 active:scale-95"
+              style={{ backgroundColor: ACCENT_COLOR }}
+            >
+              Start Your Journey
+            </Link>
+          </div>
+          <div className="absolute bottom-0 w-full h-32 bg-gradient-to-t from-white to-transparent"></div>
         </section>
       </main>
 
