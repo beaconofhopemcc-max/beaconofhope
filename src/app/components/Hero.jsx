@@ -1,121 +1,86 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 export default function Hero() {
-  const videoRef = useRef(null);
-  const [videoReady, setVideoReady] = useState(false);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (video) {
-      const playVideo = async () => {
-        try {
-          // Check if video is loaded and ready before playing
-          if (video.readyState >= 3) {
-            await video.play();
-            setVideoReady(true);
-          } else {
-            // Wait for 'canplay' event if it's not ready yet
-            video.addEventListener('canplay', handleCanPlay);
-          }
-        } catch (err) {
-          console.warn("Autoplay blocked:", err);
-        }
-      };
-      
-      const handleCanPlay = async () => {
-          try {
-              await video.play();
-              setVideoReady(true);
-          } catch (err) {
-              console.warn("Autoplay blocked after load:", err);
-          }
-          video.removeEventListener('canplay', handleCanPlay);
-      };
-      
-      playVideo();
-
-      // Cleanup function to remove event listener
-      return () => {
-        if (video) {
-            video.removeEventListener('canplay', handleCanPlay);
-        }
-      };
-    }
-  }, []);
-
   return (
-    <section className="w-full bg-black text-white overflow-hidden">
+    <section className="relative w-full min-h-[85vh] flex items-center bg-[#fdfdfd] overflow-hidden">
       
-      {/* === DESKTOP HERO (Video as background) === */}
-      <div className="hidden md:flex relative items-center justify-center h-[90vh]">
-        <video
-          ref={videoRef}
-          src="/hero.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-          poster="/hero-fallback.jpg"
-        ></video>
-
-        <div className="relative z-10 text-center px-6 md:px-12 max-w-3xl">
-          <h1 className="text-5xl md:text-6xl font-extrabold text-white leading-tight drop-shadow-lg">
-            Beacon of Hope Psychiatry
-          </h1>
-
-          <div className="mx-auto mt-4 w-32 h-[4px] rounded-full bg-gradient-to-r from-[#7D5F42] to-[#d1b08a] shadow-[0_0_15px_#7D5F42]"></div>
-
-          <p className="mt-6 text-lg md:text-xl text-white leading-relaxed drop-shadow-md">
-            Compassionate mental health care that restores clarity, balance, and peace.
-          </p>
-
-          <div className="mt-8">
-            <a
-              href="/book-consultation"
-              className="inline-block bg-white hover:bg-[#f0f0f0] text-[#004AAD] font-semibold px-8 py-3 rounded-full shadow-xl transition-all duration-300 hover:scale-[1.03]"
-            >
-              Book an Appointment
-            </a>
-          </div>
-        </div>
+      {/* Background Decorative Element (Using home.png) */}
+      <div className="absolute inset-0 z-0 opacity-10">
+        <Image 
+          src="/home.png" 
+          alt="Background Texture" 
+          fill 
+          className="object-cover"
+          priority
+        />
       </div>
 
-      {/* === MOBILE & TABLET HERO (Video & Text/Button Stacked) === */}
-      <div className="md:hidden w-full">
-        {/* Video Section */}
-        <div className="relative w-full h-[200px] flex items-center justify-center overflow-hidden bg-white"> 
-          <video
-            src="/hero.mp4"
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-contain" 
-            poster="/hero-fallback.jpg"
-          ></video>
-        </div>
+      <div className="container mx-auto px-6 md:px-12 z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          
+          {/* --- LEFT SIDE: CONTENT --- */}
+          <div className="text-center lg:text-left space-y-6">
+            <div className="inline-block px-4 py-1 rounded-full bg-[#004AAD]/10 text-[#004AAD] font-medium text-sm tracking-wide uppercase">
+              Mental Health Excellence
+            </div>
+            
+            <h1 className="text-4xl md:text-6xl font-bold text-[#1A1A1A] leading-[1.1]">
+              Beacon of Hope <br />
+              <span className="text-[#004AAD]">Psychiatry</span>
+            </h1>
 
-        {/* Text & Button Section (Standalone - White Background) */}
-        {/* Key Change: Changed p-8 to px-8 pb-8 pt-4 to reduce the top gap */}
-        <div className="px-8 pb-8 pt-4 text-center bg-white text-black">
-          <h1 className="text-3xl font-bold text-[#004AAD] leading-tight mb-4">
-            Beacon of Hope Psychiatry
-          </h1>
+            <div className="w-20 h-1.5 bg-gradient-to-r from-[#7D5F42] to-[#d1b08a] rounded-full mx-auto lg:mx-0"></div>
 
-          <div className="mx-auto w-24 h-[3px] rounded-full bg-gradient-to-r from-[#7D5F42] to-[#A0815F] shadow-sm mb-6"></div>
+            <p className="text-lg md:text-xl text-gray-600 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+              Compassionate mental health care that restores clarity, balance, and peace. We help you navigate your journey to wellness.
+            </p>
 
-          <p className="text-base text-gray-700 mb-8 max-w-sm mx-auto">
-            Compassionate mental health care that restores clarity, balance, and peace.
-          </p>
+            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+              <a
+                href="/book-consultation"
+                className="w-full sm:w-auto text-center bg-[#004AAD] hover:bg-[#003887] text-white font-bold px-10 py-4 rounded-xl shadow-lg shadow-blue-200 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+              >
+                Book an Appointment
+              </a>
+              <a
+                href="/services"
+                className="w-full sm:w-auto text-center bg-white border-2 border-gray-100 hover:border-[#004AAD] text-gray-700 font-semibold px-10 py-4 rounded-xl transition-all duration-300"
+              >
+                Our Services
+              </a>
+            </div>
+          </div>
 
-          <a
-            href="/book-consultation"
-            className="inline-block bg-[#004AAD] hover:bg-[#003887] text-white font-semibold px-8 py-3 rounded-full shadow-lg transition-all duration-300 hover:scale-[1.05]"
-          >
-            Book an Appointment
-          </a>
+          {/* --- RIGHT SIDE: HERO IMAGE --- */}
+          <div className="relative group">
+            {/* Decorative background shape */}
+            <div className="absolute -inset-4 bg-gradient-to-tr from-[#7D5F42]/20 to-[#004AAD]/10 rounded-[2rem] blur-2xl group-hover:blur-3xl transition-all duration-500"></div>
+            
+            <div className="relative overflow-hidden rounded-[2rem] shadow-2xl border-8 border-white">
+              <img
+                src="/home.png" // Replace this with your actual Hero Image filename
+                alt="Psychiatry Consultation"
+                className="w-full h-[400px] md:h-[550px] object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              
+              {/* Floating Info Card */}
+              <div className="absolute bottom-6 left-6 right-6 bg-white/80 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-white/50 hidden md:block">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-[#004AAD] rounded-full flex items-center justify-center text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-[#1A1A1A] font-bold">In-person & Telehealth</p>
+                    <p className="text-sm text-gray-600">Flexible care options available</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
